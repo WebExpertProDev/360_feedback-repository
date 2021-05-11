@@ -1,0 +1,31 @@
+// alert("<%= params[:amount]%>")
+$(".payment").html("<%= j render 'stripe_card' %>");
+
+var stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
+
+    var elements = stripe.elements();
+    var cardElement = elements.create('card');
+    cardElement.mount('#card-element');
+
+    var cardholderEmail = "<%= current_user.email %>";
+    var cardButton = document.getElementById('card-button');
+    var clientSecret = cardButton.dataset.secret;
+
+    cardButton.addEventListener('click', function(ev) {
+      stripe.handleCardPayment(
+        clientSecret, cardElement, {
+          payment_method_data: {
+            billing_details: {email: cardholderEmail}
+          }
+        }
+      ).then(function(result) {
+      if (result.error) {
+      // Display error.message in your UI.
+        toastr.error(result.error.message)
+      } else {
+        // The payment has succeeded. Display a success message.
+        $(".payment").html("<p>$<%= params[:amount].to_i %> successfully added in your credit. </p><a href='<%= user_panel_path%>'> Go back to Dashboard.</a>");
+      }
+    });
+  });
+

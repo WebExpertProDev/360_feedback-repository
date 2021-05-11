@@ -1,0 +1,45 @@
+<div class="container container-admin">
+	<ul class="nav nav-tabs nav-tabs-default nav-tabs-centered" id="tabCentered" role="tablist">
+		<% @questionnaires.each_with_index do |questionnaire,index| %>
+			<li class="nav-item">
+				<a class="text-4 nav-link <%= 'active' if index == 0 %>" id="tab<%= questionnaire.id %>" data-toggle="tab" href="#tab<%= questionnaire.id %>s" role="tab" aria-controls="tab<%= questionnaire.id %>s" aria-expanded="true"><%= questionnaire.name%></a>
+			</li>
+		<% end %>
+	</ul>
+	<div class="tab-content" id="tabCenteredContent">
+		<% @questionnaires.each_with_index do |questionnaire,index| %>
+			<div class="tab-pane fade pt-4 pb-4 <%= 'show active' if index == 0 %>" id="tab<%= questionnaire.id %>s" role="tabpanel" aria-labelledby="tab<%= questionnaire.id %>">
+				<div class="row mb-4 align-items-center">
+					<div class="col-lg-6 text-center text-lg-left">
+						<h5 class="mb-3 mb-lg-0">Dimensions of <%= questionnaire.name %></h5>
+					</div>
+					<div class="col-lg-6 text-center text-lg-right">
+						<%= link_to "Questions in this questionnaire",questions_path(questionnaire: questionnaire.id), class:"btn btn-primary mb-2 mb-lg-0" %>
+						<%= link_to "Add new dimension",new_dimension_path, class:"btn btn-primary mb-2 mb-lg-0" %>
+					</div>
+				</div>
+				<div class="table-responsive table-users">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th width="80%">Dimension Name</th>
+								<th colspan="2">
+									Actions
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% questionnaire.dimensions.each do |dimension|%>
+								<tr>
+									<td width="80%"><%= dimension.name %></td>
+									<td class="action-links text-center"><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_dimension_path(dimension) %></td>
+									<td class="action-links text-center"><%= link_to '<i class="fas fa-trash-alt text-danger"></i>'.html_safe, dimension, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

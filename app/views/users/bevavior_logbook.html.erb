@@ -1,0 +1,154 @@
+<div class="bg-light">
+  <div class="bg-purple py-5 text-center">
+    <div class="container py-2">
+      <h2 class="font-heading-1 text-none text-none text-yellow">Mind Growing Leadership Compass 360, Leadership Behavior</h2>
+      <h2 class="font-heading-2 text-none text-none text-light mb-3">Personal Logbook</h2>
+      <p class="font-paragraph-1 text-light mb-0">
+        By working on the questions in this logbook you can get the best possible results when developing yourself as a leader based on the Mind Growing 360 feedback.<br>
+        The logbook follows the structure of the report and explains how you can interpret your results.<br>
+        At the end, we will ask you to summarize, draw conclusions, and define further actions.<br>
+        We often advise discussing your results and your analysis of them with others – such as your leader, coach, or other trusted people who know you well.
+      </p>
+    </div>
+  </div>
+  <div class="container py-5">
+    <%#=  form_with(model: current_user, local: true,url: save_logbook_path,method: :put) do |f| %>
+      <%#= f.fields_for :logbook do |ff| %>
+      <h2 class="font-heading-3 text-none text-none text-purple my-4">How are you shaping and influencing interactions?</h2>
+      <p class="result-sub-heading mb-3 text-sky pt-1">
+        Overview of Behavioral Dimensions
+      </p>
+      <p class="font-paragraph-2 mb-4">
+        Have a look here at the dimensions on which you have scored high or low.<br>
+        Note down what you find surprising.<br>
+        Where do you see big differences between how you rate yourself and how others rate you?<br>
+        With this in mind, what thoughts, reflections, and questions occur to you? What would you like to investigate in greater depth? Record your notes in the box below.
+      </p>
+      <%#= ff.text_area :overview_1, rows: 6,class: "form-control mb-5" %>
+      <textarea class="form-control mb-5" rows="6"></textarea> 
+      <p class="result-sub-heading mb-4 text-sky">
+        Top 3 Strengths and Development Points
+      </p>
+      <p class="font-paragraph-2 mb-4">
+        Do you recognize them? How so? Or, why not?<br>
+        Do they affirm your reflections and questions based on the overview of all dimensions?<br>
+        Would it be enough for you to explore these Top 3 further and base your development upon them?<br>
+        Are any new reflections or questions popping up for you?
+      </p>
+      <%#= ff.text_area :overview_2, rows: 6,class: "form-control mb-5" %>
+      <textarea class="form-control mb-5" rows="6"></textarea> 
+      <p class="result-sub-heading mb-1 text-sky">
+        Your Personal SWOT Analysis
+      </p>
+      <p class="font-paragraph-2 mb-4">
+        Here you can view the main differences and agreements between how your evaluators view your main strengths and development points, and how you view them.<br>
+        Does this surprise you?<br>
+        Looking at this, what would you like to know more about? Which kind of thoughts or questions come to mind?<br>
+        Make your notes in the box below.
+      </p>
+      <%#= ff.text_area :overview_3, rows: 6,class: "form-control mb-5" %>
+      <textarea class="form-control mb-5" rows="6"></textarea> 
+      <h2 class="font-heading-3 mb-4 text-none text-none text-purple">The Mindset Driving Your Leadership</h2>
+      <p class="font-paragraph-2 mb-5">
+        Now we’ll move on to a different topic, namely mindset. This is more about the beliefs that steer your behavior. Of course, it is often difficult for people to know these beliefs for sure, but we asked your evaluators to estimate which beliefs steer your behavior based on the things that you say and do.
+        They are crucial for your development because it is difficult to change a behavior if you don't challenge the belief that is triggering it.
+      </p>
+      <p>
+        
+      </p>
+      <p class="result-sub-heading mb-4 text-sky">
+        The Mindset Meter
+      </p>
+      <p class="font-paragraph-2 mb-4">
+        The main reflection to make here is, where are you situated on the continuum between a closed/controlling and open/exploring mindset?<br>
+        How do you feel about that?<br>
+        Do you recognize it?<br>
+        And most importantly: Is this the right mindset for your current role and/or future development as a leader?
+      </p>
+      <%#= ff.text_area :overview_4, rows: 6,class: "form-control mb-5" %>
+      <textarea class="form-control mb-5" rows="6"></textarea> 
+      <p class="result-sub-heading mb-4 text-sky">
+        Overview of Steering Beliefs
+      </p>
+      <p class="font-paragraph-2 mb-4">
+        <strong>Here you can see which beliefs are pulling you towards the ‘open’ or ‘closed’ end of the Mindset Meter.</strong><br>
+        What strikes you in particular?<br>
+        Are there any surprises?<br>
+        Which main beliefs require further investigation?<br>
+        Which kind of questions pop up for you?
+      </p>
+      <%#= ff.text_area :overview_5, rows: 6,class: "form-control mb-5" %>
+      <textarea class="form-control mb-5" rows="6"></textarea> 
+      <p class="result-sub-heading mb-4 text-sky">
+        Diving in Deep...Or Not!
+      </p>
+      <p class="font-paragraph-2 text-sky mb-2"><strong>Re-read all the notes you have made in this personal logbook and answer the following questions:</strong></p>
+      <p class="font-paragraph-2 mb-4">
+        Is it clear to you now what you need/want to do?<br>
+        If so, choose what focus on. Perhaps you would like to list some actions in the section below, or perhaps you are finished for now and you can leave it at this point. Do whatever feels best!<br>
+        If it’s not clear, why not? What still needs to be answered? What is unclear?
+      </p>
+      <%#= ff.text_area :overview_6, rows: 6,class: "form-control mb-5" %>
+      <textarea class="form-control mb-4" rows="6"></textarea> 
+      <p class="font-paragraph-2 mb-1 font-weight-bold">
+        There are two important ways to get clarification if you need it. Often, they are more valuable when they are combined:
+      </p>
+      <p class="mb-4 font-paragraph-2">
+        Start by diving in deep. The following tables provide item-level information on how you have evaluated yourself and how others see you. By analyzing these, you will get on very specific insights into the kinds of behaviors that are giving you a certain score.<br>
+        For some, there may be a big difference between your self-evaluation and other’s evaluations, or there may be particularly high or low scores. These are very relevant behaviors to list. The exercise will give you a very specific picture of how your behavior could or should develop. You can also list behaviors where you have received a surprising or confusing evaluation from others.
+      </p>
+      <p class="mb-4 font-paragraph-2 font-weight-bold">
+        List the most relevant behaviors in the table below (maximum 10 items):
+      </p>
+      <div class="table-responsive">
+        <table class="table table-bordered user-table font-paragraph-2 design-table mb-4">
+          <thead class="thead-dark">
+            <tr>
+              <th colspan="2" class="text-center">
+                Behaviors to focus on
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-weight-bold" width="50%">Behavior</td>
+              <td>
+                Why is it relevant? Are you surprised by your score? Do you not understand it? Can you not translate it into reality? Would you like examples? Etc.
+              </td>
+            </tr>
+             <%# 10.times do |i| %>
+              <!-- <tr>
+                <td class="p-1">
+                  
+                  <%#= text_area_tag "user[logbook_attributes][overview_7][#{i}][]", ff.object.overview_7&.dig(i,0,0)  ,multiple: true,class: "form-control" %>
+                </td>
+                <td class="p-1">
+                  <%#= text_area_tag "user[logbook_attributes][overview_7][#{i}][]", ff.object.overview_7&.dig(i,0,1) ,multiple: true,class: "form-control" %>
+                </td>
+              </tr> -->
+            <%# end %>
+          </tbody>
+        </table>
+      </div>
+      <p class="mb-5 font-paragraph-2">
+        The second way (and this is made possible with the list you just created) is to arrange a conversation (or a few) with your leader, coach, someone else you trust. Use this meeting to discuss your report and your thoughts about it.
+      </p>
+      <p class="mb-5 font-paragraph-2">
+        Using the list of behaviors above is helpful because it gives you a very concrete anchor point that you can use when reflecting or inviting feedback during your discussion. In our experience, this often leads to very rich conversations.
+      </p>
+      <p class="result-sub-heading mb-4 text-sky">
+        Actions
+      </p>
+      <p class="mb-4 font-paragraph-2">
+        If you feel it could be helpful, write down some actions. You can make them very specific and concrete using prompts such as ‘what’, ‘when’, ‘by when’, ‘how’ and ‘with whom’.<br>
+        Alternatively, if it works better for you, keep them more general. Make a drawing, put in a picture, or something else that you find useful.
+      </p>
+      <%#= ff.text_area :overview_8, rows: 6,class: "form-control mb-5" %>
+      <textarea class="form-control mb-4" rows="6"></textarea> 
+      <center>
+      <%#= f.submit 'save',class: 'btn btn-primary mt-4' %>
+      </center>
+      <%# end %>
+    <%# end %>
+  </div>
+</div>

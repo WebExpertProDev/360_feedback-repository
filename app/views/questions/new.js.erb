@@ -1,0 +1,17 @@
+$('#question_statements_attributes_0_full_text').val('<%= @statement1 %>');
+$('#question_statements_attributes_1_full_text').val('<%= @statement2 %>');
+
+
+$("#dimension_id").empty();
+$("#dimension_id").append( $('<option>Select a dimension</option>'));
+<% @dimensions.each do |d| %>
+  $("#dimension_id").append($('<option value="<%= d.id %>"><%= d.name %></option>'));
+<% end %>
+
+<% if @questionnaire.id == 3 %>
+	$('#question_options_attributes_1_full_text').hide();
+	$('#question_options_attributes_1_option_type').hide();
+<% else %>
+	$('#question_options_attributes_1_full_text').show();
+	$('#question_options_attributes_1_option_type').show();
+<% end %>

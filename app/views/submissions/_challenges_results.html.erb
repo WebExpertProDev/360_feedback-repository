@@ -1,0 +1,578 @@
+<div class="logbook-btn">
+  <button class="btn btn-primary btn-sm btn-print" onclick="window.print()">Print Report</button>
+  <% if @leadership_survey.logbook.present? %>
+    <a class="btn btn-primary btn-sm btn-logbook" href="<%= edit_leadership_survey_logbook_path(@leadership_survey,@leadership_survey.logbook) %>">Go to Personal logbook</a>
+  <% else %>
+    <a class="btn btn-primary btn-sm btn-logbook" href="<%= new_leadership_survey_logbook_path(@leadership_survey) %>">Go to Personal logbook</a>
+  <% end %>
+</div>
+<div class="bg-light">
+  <div class="bg-purple py-5 position-relative">
+    <div class="container py-2">
+      <h2 id="break" class="font-heading-4 text-none text-center text-light mb-3">
+      Mind Growing 360 Leadership Compass: Leadership Challenges
+      <!-- Personal leadership 360 feedback for  -->
+      <%#= @leadership_survey.user.name %>
+      </h2>
+      <p class="font-paragraph-1 text-center text-light mb-0">
+        Personal feedback report for <%= @response.leadership_survey.user.name %>
+      </p>
+      <p class="font-paragraph-1 text-center text-light mb-0">
+        Disclaimer: This report has been prepared with professional care. It is valid for a maximum of 2 years.
+      </p>
+    </div>
+  </div>
+  <div class="bg-light py-5">
+    <div class="container mt-4">
+      <h2 class="text-none font-heading-5 mb-4">Table of contents</h2>
+      <ol class="text-purple table-ol font-weight-bold">
+        <li class="li1">
+          <a href="#li-1a">
+            Part 1: Introduction and Background: The Leadership Challenges – Why, How, and What?
+          </a>
+        </li>
+        <li class="li1">
+          <a href="#li-1b">
+            Part 2: Your Personal Growth Dashboard
+          </a>
+          <ol class="text-sky table-ol">
+            <li class="li2">
+              <a href="#li-2a">
+                The Leadership Challenges Behaviour
+              </a>
+              <ol class="text-purple table-ol li3">
+                <li>
+                  <a href="#li-3a">
+                    Overview of Behavioural Dimensions
+                  </a>
+                </li>
+                <li>
+                  <a href="#li-3b">
+                    Key Strengths and Development Points
+                  </a>
+                </li>
+                <li>
+                  <a href="#li-3c">
+                    Personal SWOT
+                  </a>
+                </li>
+              </ol>
+            </li>
+            <li class="li2">
+              <a href="#li-2b">
+                The Leadership Challenges Mindset
+              </a>
+              <ol class="text-purple table-ol li3">
+                <li>
+                  <a href="#li-3d">
+                    Mindset Meter
+                  </a>
+                </li>
+                <li>
+                  <a href="#li-3e">
+                    Overview of Steering Beliefs
+                  </a>
+                </li>
+              </ol>
+            </li>
+            <li class="li2">
+              <a href="#li-2c">
+                Diving in Deep
+              </a>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <hr>
+  <div class="container py-5 content-result">
+    <h3 class="font-heading-3 text-none text-purple mt-2 mb-4" id="li-1a">Part 1: Introduction and Background: The Leadership Challenges – Why, How, and What?</h3>
+    <p class="font-paragraph-2 mb-3">As described in my book Mind Growing: Leadership is interaction. To grow your own mind and those of others, interaction is key!</p>
+    <p class="font-paragraph-2 font-weight-bold">
+      Each interaction has a core DNA of 3 essential elements, namely:
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-sky font-weight-bold">Content</span> leading to a result in a certain area. What is the content of the interaction? What are you talking about? And what needs to be the outcome or result?
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-sky font-weight-bold">Structure</span> leading to a result. How is an interaction structured? What is the agenda? Wow will decisions be made, who takes which role, and so forth?
+    </p>
+    <p class="font-paragraph-2 mb-3">
+      <span class="text-sky font-weight-bold">Relations</span> leading to a result. How is the relationship between the people interacting? Do they respect each other? Is there trust? Are they listening to each other, taking care, of one another, and so forth?
+    </p>
+    <p class="font-paragraph-2 mb-3 font-weight-bold">
+      These 3 elements play a role regardless of what level the interaction is taking place at:
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-purple font-weight-bold">At an individual level:</span> What is your goal? How do you structure yourself? And how is your relationship with yourself? Do you respect, trust, and take care of yourself?
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-purple font-weight-bold">At the level of a face-to-face talk:</span> What is the goal of the talk, the agenda? And how are you relating to your sparring partner?
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-purple font-weight-bold">At the team level:</span> What are the team’s goals? How are meetings and roles structured? How are the relationships between team members?
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      <span class="text-purple font-weight-bold">At the company level:</span> What is the company’s mission, structure, and culture?
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      Using our experience, and by looking at the challenges that face leaders and companies over the coming decades, we have defined the New Leadership ABCs - Ambition, Boundaries, Culture & Coaching. In essence these are 3 different words for the same DNA essential elements we called content, structure and relations.
+    </p>
+    <p class="font-paragraph-2 mb-1 text-sky font-weight-bold">Ambition (content)</p>
+    <p class="font-paragraph-2 mb-1 text-sky font-weight-bold">Boundaries (structure)</p>
+    <p class="font-paragraph-2 mb-4 text-sky font-weight-bold">Culture and Coaching (relations)</p>
+    <p class="font-paragraph-2 mb-1">
+      They are explained in further detail in my book:
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      Mind Growing Leadership: Build thriving companies through personal growth
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      See also the books website: <a href="https://www.mindgrowing.net" target="_blank" class="text-sky">www.mindgrowing.net</a>
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      Then, in the context of future leadership, we defined how these different elements relate to one other and the leader as a person.
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      This led us to identify 7 key leadership challenges for the coming decades, and these are subject to the 360° compass leadership challenges. So, in essence, this questionnaire gathers feedback about key behaviors that relate to how you are dealing at this moment with these challenges and where to improve.
+    </p>
+    <p class="font-paragraph-2 mb-3 font-weight-bold">
+      The 7 key leadership challenges are:
+    </p>
+    <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+      Leading the undercurrent
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      How to lead (hidden) emotions and agendas?
+    </p>
+    <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+      Infecting people with purpose
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      How to infect others with purpose and meaning?
+    </p>
+    <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+      Offering solid ground
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      How to maintain solid ground in times of high volatility?
+    </p>
+    <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+      Facilitating productive collaboration
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      How to structure for optimal collaboration and engagement?
+    </p>
+    <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+      Releasing energy
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      How to get creativity and innovation flowing?
+    </p>
+    <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+      Fostering agility
+    </p>
+    <p class="font-paragraph-2 mb-0">How to become agile?</p>
+    <p class="font-paragraph-2 mb-4">And finally, because one is always operating within a context, we added a 7th challenge: </p>
+    <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+      Thinking Outside-in
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      How to translate the needs of the environment into better and/or new services and products.
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      These 7 leadership challenges are subject to the 360° Mind Growing Leadership compass challenges. We see them as a framework for collecting feedback from relevant others, so that leaders can better develop themselves to tackle current and future challenges. Read more about the challenges and find tips about how to handle them at
+      <br>
+      <a href="https://theleadershippyramid.net/" class="text-sky">www.theleadershippyramid.net</a>
+    </p>
+    <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">Mindset</p>
+    <p class="font-paragraph-2 mb-4">
+      As explained in my book Mind Growing, your beliefs steer your behavior. This is why the questionnaire asks you to evaluate which beliefs you see as steering your leadership behavior. The collection of your beliefs is called Mindset.
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      To break things down further, we have defined two opposing mindsets:
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      A Closed/Controlling mindset;
+      <br> An Open/Exploring mindset
+    </p>
+    <p class="font-paragraph-2 mb-2">
+      Your own will be somewhere between these 2 opposites.
+    </p>
+  </div>
+  <hr>
+  <div class="container py-5 content-result">
+    <h3 class="font-heading-3 text-none text-purple mt-2 mb-4" id="li-1b">Part 2: Your Personal Growth Dashboard</h3>
+    <p class="text-sky result-sub-heading mb-3" id="li-2a">
+      How Are You Dealing with the Leadership Challenges?
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      Below you can compare how you evaluate your ability to handle the different leadership challenges with how others believe you handle them.
+      <br> Horizontally, there are also two development bars. They indicate how your supervisor and all others perceive your ability to handle the development challenges. The black bar indicates where your supervisor thinks you should be to develop yourself as a leader. The grey bar indicates what all others think about where you need to score.
+    </p>
+    <p class="result-sub-heading-2 text-purple mb-4" id="li-3a">Overview of Behavioral Dimensions</p>
+    <div class="bar-chart d-block d-md-none">
+        <%= chartjs_bar_chart @graph_object,{
+          plugins: {datalabels: false
+          }} %>
+      </div>
+      <div class="d-none d-md-block">
+        <%= chartjs_bar_chart @graph_object,{
+          height: 100,
+          plugins: {datalabels: false
+          }} %>
+      </div>
+    <div class="row my-4">
+      <div class="col-md-6 pt-3">
+        <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+          Fostering agility
+        </p>
+        <p class="font-paragraph-2 mb-4">
+          How to become agile?
+          <br> And finally, because one is always operating within a context, we added a 7th challenge:
+        </p>
+        <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+          Infecting people with purpose
+        </p>
+        <p class="font-paragraph-2 mb-4">
+          How to infect others with purpose and meaning?
+        </p>
+        <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+          Providing solid ground
+        </p>
+        <p class="font-paragraph-2 mb-4">
+          How to maintain solid ground in times of high volatility?
+        </p>
+        <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">Leading the undercurrent</p>
+        <p class="font-paragraph-2 mb-4">
+          How to lead (hidden) emotions and agendas?
+        </p>
+      </div>
+      <div class="col-md-6 pt-3">
+        <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+          Releasing energy
+        </p>
+        <p class="font-paragraph-2 mb-4">
+          How to get creativity and innovation flowing?
+        </p>
+        
+        <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+          Thinking Outside-in
+        </p>
+        <p class="font-paragraph-2 mb-4">
+          How to translate the needs of the environment into better and/or new services and products.
+        </p>
+        <p class="font-paragraph-2 mb-0 text-purple font-weight-bold">
+          Facilitating productive collaboration
+        </p>
+        <p class="font-paragraph-2 mb-4">
+          How to structure for optimal collaboration and engagement?
+        </p>
+      </div>
+    </div>
+    <p class="text-purple result-sub-heading mb-5" id="li-3b">
+      Top 3 Strengths and Development Points
+    </p>
+    <table class="table table-bordered user-table design-table font-paragraph-2 mb-4">
+      <thead class="thead-dark">
+        <tr width="100%">
+          <th width="50%">3 Top Strengths </th>
+          <th width="50%">3 Key development points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= @top3_questions_positive_options.first %>
+          </td>
+          <td>
+            <%= @last3_questions_negative_options.first %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= @top3_questions_positive_options.second %>
+          </td>
+          <td>
+            <%= @last3_questions_negative_options.second %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= @top3_questions_positive_options.third %>
+          </td>
+          <td>
+            <%= @last3_questions_negative_options.third %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <p class="pt-3 font-paragraph-2 mb-5">
+      The top 3 strengths and development points are based only on feedback from others (so they do not represent your self-evaluation).
+      <br> The top 3 strengths are those items with the highest scores – evaluators don’t believe any change is needed (i.e., you do not need to do anymore or less)
+      <br> The top 3 development points are the 3 items with a low score - here, evaluators see the biggest need for change.
+    </p>
+    <p class="text-purple result-sub-heading mb-4" id="li-3c">
+      Your Personal SWOT Analysis
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">Acknowledged strengths</span> = strengths that you see yourself (self-evaluation) and which are also acknowledged by others
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">Acknowledged development points</span> = development points that you recognize yourself and which are also acknowledged by others
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">Hidden talents (= Opportunities)</span> = behaviors that you yourself evaluate as in need of development, but which others view as strong.
+    </p>
+    <p class="mb-4 font-paragraph-2">
+      <span class="text-sky font-weight-bold">Blind spots (= Threats)</span> = behaviors that you consider yourself strengths but which others view as possible development points.
+    </p>
+    <div class="row mb-5">
+      <div class="col-md-6 mb-md-4">
+        <label class="text-sky font-paragraph-2 font-weight-bold">Acknowledged strengths</label>
+        <table class="table-responsive d-md-table table table-bordered user-table">
+          <tbody>
+            <% @swot_analysis[:ack_talents].each do |v| %>
+              <tr>
+                <td>
+                  <%= v %>
+                </td>
+              </tr>
+              <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 mb-md-4">
+        <label class="text-sky font-paragraph-2 font-weight-bold">Hidden talents</label>
+        <table class="table-responsive d-md-table table table-bordered user-table">
+          <tbody>
+            <% @swot_analysis[:hidden_talents].each do |v| %>
+              <tr>
+                <td>
+                  <%= v %>
+                </td>
+              </tr>
+              <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 mb-md-4">
+        <label class="text-sky font-paragraph-2 font-weight-bold">Acknowledged development points</label>
+        <table class="table-responsive d-md-table table table-bordered user-table">
+          <tbody>
+            <% @swot_analysis[:ack_dev_talents].each do |v| %>
+              <tr>
+                <td>
+                  <%= v %>
+                </td>
+              </tr>
+              <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 mb-md-4">
+        <label class="text-sky font-paragraph-2 font-weight-bold">Blind spots</label>
+        <table class="table-responsive d-md-table table table-bordered user-table">
+          <tbody>
+            <% @swot_analysis[:blind_spots].each do |v| %>
+              <tr>
+                <td>
+                  <%= v %>
+                </td>
+              </tr>
+              <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <p class="text-sky result-sub-heading mb-4" id="li-2b">
+      The Mindset Driving your Leadership
+    </p>
+    <p class="text-purple result-sub-heading-2 mb-3" id="li-3d">
+      The Mindset Meter
+    </p>
+    <p class="font-paragraph-2 mb-2">
+      Your mindset is how you see the world, and encompasses your key beliefs about how humans and organizations (need to) function.
+      <br>
+      To further clarify, we have defined two opposite mindsets. Both are useful and necessary in certain circumstances. The two opposite mindsets are:
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">The closed, controlling mindset.</span> If you have a closed/controlling mindset, you believe that things need to be structured, organized, and controlled. You believe that people should focus on their tasks. get clear instructions and that you should follow through on them
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">The open, exploring mindset.</span> If you have an open/exploring mindset, you believe that you need to trust people and process. You believe that giving people autonomy will create energy that can be guided in the right direction.
+    </p>
+    <p class="mb-5 font-paragraph-2">
+      In the graph below, you can see where different categories of evaluators place you between the closed/controlling and open/exploring extremes. So your own mindset lies somewhere in between them! In the next section, you can see your scores on the different beliefs that are related to a closed or open mindset.
+    </p>
+    <div class="py-3">
+      <center>
+      <div id="chartContainer">
+        <%= render 'speedometer' %>
+        <%#= @chart.render() %>
+      </div>
+      </center>
+    </div>
+    <p class=" text-center mt-4 text-purple result-sub-heading-2 mb-3" id="li-3e">
+      Overview of Steering Beliefs
+    </p>
+    <p class="text-center font-paragraph-2 mb-4">
+      In the graph below, you will find the scores that you and others have given you for each of the core beliefs that define your mindset. Below the graph, you will find the definition of each belief and how it relate to an open or closed mindset.
+    </p>
+    <div class="pb-5">
+      <div class="bar-chart d-block d-md-none">
+        <%= chartjs_bar_chart @graph_object_mindset,{
+          plugins: {datalabels: false
+          }} %>
+      </div>
+      <div class="d-none d-md-block">
+        <%= chartjs_bar_chart @graph_object_mindset,{
+          height: 100,
+          plugins: {datalabels: false
+          }} %>
+      </div>
+    </div>
+    <table class="table-responsive d-md-table table table-bordered user-table design-table font-paragraph-2 mb-5">
+      <thead class="thead-dark">
+        <tr>
+          <th></th>
+          <th>Open/Explorative</th>
+          <th>Closed/Controlling</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-weight-bold">
+            Locus of control
+          </td>
+          <td>
+            While many organizational situations are complex and while the world and its markets change quickly, each of us can still shape our own successes or failures.
+          </td>
+          <td>
+            Most organizational situations are complex. The world and its markets change so quickly that we have little influence on our own successes and failures. These are mostly defined by circumstance
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Purpose
+          </td>
+          <td>
+            Profit is necessary but is a consequence of having a strong purpose. Purpose is more important than profit.
+          </td>
+          <td>
+            The goal of a company is to make profits.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Transparency
+          </td>
+          <td>
+            We must be transparent, share information, and show people data on everything.
+          </td>
+          <td>
+            A lot of information does not need to be shared, people will be indiscreet or panic. It is better to work on a need-to-know basis
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Networks
+          </td>
+          <td>
+            A company can function and get results with minimal structure, rules, planning, and control. Networks of people are more effective than a rigid top-down structure
+          </td>
+          <td>
+            We need structure, rules, and control to function and get results. Only a clear top-down organizational structure will work.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Experimentation
+          </td>
+          <td>
+            We cannot shape, measure, and mechanically control our world and company. However, we can influence it to evolve in a certain direction. We need experimentation instead of planning.
+          </td>
+          <td>
+            We can shape, measure, and control our world and our company. Planning is crucial.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Participation
+          </td>
+          <td>
+            Involving people leads to more support, creativity, and energy.
+          </td>
+          <td>
+            Involving people is time-consuming and a top-down approach is much more efficient
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Renewal
+          </td>
+          <td>
+            It’s necessary to keep questioning ways of doing things.
+          </td>
+          <td>
+            Let’s stick to what we know and what works
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Empowerment
+          </td>
+          <td>
+            People can handle freedom and autonomy. They thrive when given purpose, autonomy, and mastery. “We can and need to trust people until we are proven wrong.”
+          </td>
+          <td>
+            People need rules, control, and push to perform. The best way to motivate people is to reward and punish them (i.e., with a ‘carrot and stick’ approach) “They have to earn trust and not the easy way.”
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-sky result-sub-heading mb-3" id="li-2c">
+      Diving in Deep
+    </p>
+    <p class="font-paragraph-2 mb-3">
+      Below you will find on item-level evaluations that you and others have given. These relate both to the frequency of your behavior now, and for how it should be for you to develop yourself.
+    </p>
+    
+    <% @questionnaires.each do |qq| %>
+      <!-- <h2 class="text-none text-center mt-4"><%#= qq.name %></h2> -->
+      <% qq.dimensions.each do |d| %>
+        <% if d.question_options.present? %>
+          <!-- <h3 class="text-none text-center mb-3"><%#= d.name %></h3> -->
+          <%# <div class="accordion_container"> %>
+            <% d.question_options.positive.each do |o| %>
+              <%= render 'summary_table',option: o, score_values_hash: Submission::BEHAVIOUR_SCORE_DESC %>
+            <% end %>
+          <%# </div> %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- <div id="chartContaiNetworksner2"><%#= @chart2.render() %></div> -->
+  <%# <h2 class="text-none text-center">Overview</h2>
+  <h3 class="text-center mb-3">Mindset Challenges, Why, How, What?</h3> %>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".accordion_head").click(function() {
+      if ($('.accordion_body').is(':visible')) {
+        $(".accordion_body").slideUp(300);
+        $(".plusminus").text('+');
+      }
+      if ($(this).next(".accordion_body").is(':visible')) {
+        $(this).next(".accordion_body").slideUp(300);
+        $(this).children(".plusminus").text('+');
+      } else {
+        $(this).next(".accordion_body").slideDown(300);
+        $(this).children(".plusminus").text('-');
+      }
+    });
+  });
+</script>

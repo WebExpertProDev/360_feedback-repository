@@ -1,0 +1,62 @@
+<!-- Modal -->
+<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="start_surveyLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="start_surveyLabel">Start Assessment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with url: start_survey_path do |form| %>
+        <div class="modal-body">
+            <div class="form-group row align-items-center">
+              <%= form.label :name,class: "control-label col-sm-2" %>
+              <div class="col-sm-10">
+                <%= form.text_field :name,placeholder: "Personality Test #1, Mindset Test #3 etc",class: "form-control",required: true %>
+              </div>
+            </div>
+            <label> Select which questionnaire questions you want to include in the survey</label>
+            <%= check_box_tag "type[]","Leadership Challenges",false,{id: "leadership", class:"style-checkbox filter-option"} %>
+              <label for="leadership">Leadership Challenges</label>
+            
+            <div id="statements" style="display: none;">
+              <label>What kind of feedback would you like to have? </label>
+              </br>
+              <%= radio_button_tag "statements",false,false,{id: "first_statement", class:""} %>
+              <label for="first_statement">How am I currently doing as a leader?</label>
+              <br/>
+              <%= radio_button_tag "statements",true,false,{id: "both_statements", class:""} %>
+              <label for="both_statements">How am I doing and where to improve?</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" >Save changes</button> -->
+            <%= form.submit "Start Assessment",id: "survey_submit",class: "btn btn-primary disable-button" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).on("turbolinks:load",function() {
+        // $("#statments").show();
+    $('#survey_submit').prop('disabled', true);
+    $(".style-checkbox").change(function(){
+      if ($("#leadership").is(":checked")) {
+        $("#statements").show();
+        $('#survey_submit').prop('disabled', false);
+        $('#survey_submit').removeClass('disable-button');
+      }else{
+        $("#statements").hide();
+        $('#survey_submit').prop('disabled', true);
+        $('#survey_submit').addClass('disable-button');
+        $("#first_statement").prop("checked",false);
+        $("#both_statements").prop("checked",false);
+
+      }
+    });
+  });
+</script>

@@ -1,0 +1,43 @@
+<div class="container-fluid container-top">
+  <div class="container container-signin container-sign">
+    <div class="modal-login-body">
+      <h3 class="text-center letter-spacing-0">Login to Mind Growing</h3>
+      <hr/>
+      <a href="<%= user_facebook_omniauth_authorize_path %>">
+        <div class="loginmodal-fb mb-2">Login with Facebook</div>
+      </a>
+      <a href="<%= user_google_oauth2_omniauth_authorize_path %>">
+        <div class="loginmodal-google mb-2"> Login with Google</div>
+      </a>
+      <div class="row">
+        <div class="col-5"><hr class="hr-or"></div>
+        <div class="col-2"><p class="text-center mb-0 lh-35">OR</p></div>
+        <div class="col-5"><hr class="hr-or"></div>
+      </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: 'Enter Your Email', class: 'form-control login-form', required: true %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "off", placeholder: 'Enter Your Password', class: 'form-control login-form', required: true, minlength: 6 %>
+      </div>
+      
+      <% if devise_mapping.rememberable? -%>
+      <div class="form-group remember_me">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+      <% end -%>
+      
+      <div class="actions mt-3">
+        <%= f.submit "Login", class: 'btn btn-primary btn-lg btn-block mb-3 btn-submit' %>
+      </div>
+      <% end %>
+      <center><%= link_to "Forgot your password?", new_password_path(resource_name) %></center>
+      <hr/>
+      <center>Not a member? <%= link_to "Sign up", new_registration_path(resource_name) %></center>
+    </div>
+  </div>
+</div>

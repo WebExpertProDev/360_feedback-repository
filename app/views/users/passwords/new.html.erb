@@ -1,0 +1,22 @@
+<div class="container-fluid container-top">
+  <div class="container container-signin container-sign">
+    <div class="modal-login-body">
+      <h3 class="text-center">Forgot your Password?</h3>
+      <hr/>
+      
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= devise_error_messages! %>
+      
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: 'Enter Your Email', class: 'form-control login-form', required: true %>
+      </div>
+      
+      <div class="actions mt-3">
+        <%= f.submit "Reset Password", class: 'btn btn-primary btn-lg btn-block mb-3 btn-submit' %>
+      </div>
+      <% end %>
+      <center>Not a member? <%= link_to "Sign up", new_registration_path(resource_name) %></center>
+      <center>Already a member? <%= link_to "Login", new_session_path(resource_name) %></center>
+    </div>
+  </div>
+</div>

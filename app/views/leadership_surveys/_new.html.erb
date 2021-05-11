@@ -1,0 +1,136 @@
+<%= form_with model: @leadership_survey,local: true do |form| %>
+<!-- Modal -->
+  <div class="modal fade" id="start_survey" tabindex="-1" role="dialog" aria-labelledby="start_surveyLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="start_surveyLabel">Start Assessment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= form.fields_for :responses  do |response_field| %>
+          <%= response_field.hidden_field :user_id,value: current_user.id %>
+          <%= response_field.hidden_field :user_type,value: "self" %>
+        <% end %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= form.label 'Give this assessment a name', class: "control-label" %>
+              <%= form.text_field :name,placeholder: "Personality Test #1, Mindset Test #3 etc",class: "form-control text",required: true %>
+          </div>
+          <%#= form.collection_check_boxes :questionnaire_ids, Questionnaire.all, :id, :name ,{ checked: [Questionnaire.last.id] } %>
+          <%# Questionnaire.all.each do |q| %>
+          <%#= form.hidden_field :questionnaire_ids, :multiple => true,value: q.id %>
+          <%# end %>
+          <label>Which type of assessment would you like to do ?</label></br>
+          <%= form.radio_button(:survey_type, :challenges, id:"c1") %>
+          <label class="d-inline" for="c1">
+            360 leadership compass, Challenges: Collects feedback about how you handle the 7 core leadership challenges (see info on home page)
+          </label></br>
+          <%= form.radio_button(:survey_type, :behaviour, id:"c2")%>
+          <label class="d-inline" for="c2">
+            360 Leadership Compass, Behaviour: Collects feedback about the behavioural strategies you use to influence others (see info on home page)
+          </label>
+          <%= form.hidden_field :both_statements,value: true %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" >Save changes</button> -->
+          <% if current_user.corporate_user? && current_user.surveys.count < 1 %>
+            <%= form.submit "Start Assessment",id: "survey_submit",class: "btn btn-primary disable-button survey_submit" %>
+          <% else %>
+            <button type="button" class="btn btn-primary survey_submit disable-button challengepaymentModal" data-toggle="modal" data-target="#challengepaymentModal" data-dismiss="modal">Next
+            </button>
+            <button type="button" class="btn btn-primary survey_submit disable-button behaviorpaymentModal d-non" data-toggle="modal" data-target="#behaviorpaymentModal" data-dismiss="modal">Next
+            </button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="behaviorpaymentModal" tabindex="-1" role="dialog" aria-labelledby="behaviorpaymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="behaviorpaymentModalLabel">Make Payment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>A Payment of <%= number_to_currency(Variable.behavior_assessment_payment_amount/100, unit: '$') %> will be deducted from your wallet for this assessment. Please click confirm button to start your assessment.</p>
+          <% if current_user.balance_cents < Variable.behavior_assessment_payment_amount %>
+            <p class="mark px-sm-5 text-center">Oops! Your wallet doesn’t have the amount needed to start this assessment. Please top up </p>
+            <div class="text-center">
+              <%= link_to 'Top Up', top_up_path, class:"btn btn-primary btn-sm" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <% if current_user.balance_cents >= Variable.behavior_assessment_payment_amount %>
+            <%= form.submit "Confirm", id: "survey_submit",class: "btn btn-primary" %>
+          <% else %>
+            <button type="button" class="btn btn-primary disable-button">Confirm</button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="challengepaymentModal" tabindex="-1" role="dialog" aria-labelledby="challengepaymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="challengepaymentModalLabel">Make Payment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>A Payment of <%= number_to_currency(Variable.challenge_assessment_payment_amount/100, unit: '$') %> will be deducted from your wallet for this assessment. Please click confirm button to start your assessment.</p>
+          <% if current_user.balance_cents < Variable.challenge_assessment_payment_amount %>
+            <p class="mark px-sm-5 text-center">Oops! Your wallet doesn’t have the amount needed to start this assessment. Please top up </p>
+            <div class="text-center">
+              <%= link_to 'Top Up', top_up_path, class:"btn btn-primary btn-sm" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <% if current_user.balance_cents >= Variable.challenge_assessment_payment_amount %>
+            <%= form.submit "Confirm", id: "survey_submit",class: "btn btn-primary" %>
+          <% else %>
+            <button type="button" class="btn btn-primary disable-button">Confirm</button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+<script type="text/javascript">
+  $(document).on('change','input',function() {
+    var id = $(this).attr('id');
+    var m1 = $('.challengepaymentModal');
+    var m2 = $('.behaviorpaymentModal');
+    if(id == "c1"){
+      m1.show();
+      m2.hide();
+    }
+    else if(id == "c2"){
+      m2.show();
+      m1.hide();
+    }
+    var len = $('input[type="radio"]:checked').length;
+    var text = $('.text').val();
+    if (len > 0 && text != ""){
+     $('.survey_submit').removeClass('disable-button');
+    } 
+    else if (len == 0 || text == "") {
+    $('.survey_submit').addClass('disable-button');
+    }
+ })
+</script>

@@ -1,0 +1,49 @@
+<div class="container-fluid container-admin">
+	<div class="container">
+		<div class="row mb-4 align-items-center">
+			<div class="col-lg-9 text-center text-lg-left">
+				<h5 class="mb-3 mb-lg-0">You have been invited to these assessments</h5>
+			</div>
+			<div class="col-lg-3 text-center text-lg-right">
+				<%= link_to "<i class='fas fa-plus mr-2 text-5'></i>new Assessment".html_safe,new_leadership_survey_path,remote: true,class: 'btn btn-primary mb-2 mb-lg-0' %>
+			</div>
+		</div>
+		<div class="table-responsive table-users leadership-table">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="text-center">Assessment ID</th>
+						<th class="text-center">Name</th>
+						<th class="text-center">
+							Actions
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @tests.each do |test| %>
+						<tr id="test_<%= test.id %>">
+							<td class="text-center"><%= test&.slug %></td>
+							<td class="text-center"><%= test&.name %></td>
+							<td class="action-links">
+									<%#= link_to "<i class='fas fa-stream mr-2'></i>Continue Assessment".html_safe, user_survey_path(test&.slug), class:"btn btn-info btn-sm mr-3 mb-2 mb-lg-0" %>
+
+									<% response = test.responses.where(user: current_user,user_id: current_user.id).first %>
+
+									<% if response.present? %>
+
+										<%= link_to "<i class='fas fa-stream mr-2'></i>#{response.completed ? "Assessment Completed": "Continue Assessment"}".html_safe, (response.completed ? "#": edit_response_path(response)),class:"btn #{response.completed ? "disabled": ""} btn-info btn-sm mr-3 mb-2 mb-lg-0" %>
+									<% else %>
+										<%= link_to "<i class='fas fa-stream mr-2'></i>Start Assessment".html_safe, new_leadership_survey_response_path(test), remote: true ,class:"btn btn-info btn-sm mr-3 mb-2 mb-lg-0" %>
+									<% end %>
+									
+
+								<%#= link_to "<i class='fas fa-trash-alt mr-2'></i>Remove Assessment".html_safe, destroy_test_path(test.id), class:"btn btn-danger btn-sm mr-3 mb-2 mb-lg-0",method: :delete,remote: true %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<center><%#= paginate @tests %></center>
+		</div>
+	</div>
+</div>

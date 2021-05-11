@@ -1,0 +1,31 @@
+<%= form_with(model: dimension, local: true) do |form| %>
+  <% if dimension.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% dimension.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <% if I18n.locale != :en && form&.object&.id.present?  %>
+      <% Globalize.with_locale(:en) do %>
+        <p class='mark text-center'>Dimension (English: <%= form.object.name %>)<p>
+      <% end %>
+    <% end %>
+    <%= form.text_field :name, required: true,class: "form-control login-form", placeholder:"Name" %>
+  </div>
+  <div class="form-group">
+    <% if I18n.locale != :en && form&.object&.id.present?  %>
+      <% Globalize.with_locale(:en) do %>
+        <p class='mark text-center'>Questionnaire (English: <%= form.object.questionnaire.name %>)<p>
+      <% end %>
+    <% end %>
+    <%= form.select :questionnaire_id,options_for_select(Questionnaire.all.map{|x| [x.name,x.id]},dimension.questionnaire_id),{include_blank: "Select Questionnaire"},{class: "form-control login-form"} %>
+  </div>
+  <div class="actions mt-3">
+    <%= form.submit "Save", class: 'btn btn-primary btn-lg btn-block mb-3' %>
+    <%= link_to 'Cancel', dimensions_path,class: "btn btn-secondary btn-lg btn-block mb-3" %>
+  </div>
+<% end %>

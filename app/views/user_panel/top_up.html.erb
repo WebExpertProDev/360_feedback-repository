@@ -1,0 +1,19 @@
+<div class="container-fluid container-top">
+  <div class="container container-signin container-sign">
+    <div class="modal-login-body">
+      <div class="payment">
+        <h3 class="text-center mb-3">Top Up</h3>
+        <%= form_with url: payment_path do |form| %>
+        
+        <div class="form-group">
+          <%= form.number_field :amount,step: "0.01",min: 0, placeholder: 'Enter Amount', class: 'form-control login-form', required: true %>
+        </div>
+        
+        <div class="actions mt-3">
+          <%= form.submit "Top Up", class: 'btn btn-primary btn-lg btn-block mb-3 btn-submit' %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

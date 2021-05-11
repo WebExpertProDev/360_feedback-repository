@@ -1,0 +1,158 @@
+<nav class="navbar navbar-icon-top navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand py-0" href="<%= root_path %>"><img src="/logo.png">  </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto align-items-lg-center">
+        <li class="nav-item active">
+          <a class="nav-link" href="<%= root_path %>">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://compassiontolead.net/about-us/" target="_blank">ABOUT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://compassiontolead.net/what-we-can-do-for-you/" target="_blank">SERVICES</a>
+        </li>
+        <% if !user_signed_in? %>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt mr-1"></i> SIGN IN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-secondary text-white align-items-center" href="<%= new_user_registration_path %>" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user mr-2 text-0"></i> SIGN UP</a>
+          </li>
+        <% else %>
+          <!--<% if controller_name == 'questionnaires' || controller_name == 'dimensions' || controller_name == 'questions' || (controller_name == 'admin_panel' && action_name == 'questionnaires') || (controller_name == 'submissions' && action_name == 'edit') || (controller_name == 'submissions' && action_name == 'results') %>
+            <div class="dropdown mr-3">
+              <li class="nav-item mb-2 mb-lg-0">
+                <a data-target="#locale" href="#" class="dropdown-toggle nav-link btn btn-secondary text-white align-items-center locale-dropdown" data-toggle="dropdown">Language<i class="fas fa-chevron-down ml-2 text-0 down-arrow"></i></a>
+                <div class="dropdown-menu bg-white" id="locale">
+                    <%= link_to "Eng", locale: 'en' %>
+                    <%= link_to "Fre", locale: 'fr' %>
+                    <%= link_to "Spa", locale: 'es' %>
+                </div>
+              </li>
+            </div>
+          <% end %>-->
+          <div class="dropdown">
+            <li class="nav-item">
+              <a data-target="#navbarDropdown" href="#" class="dropdown-toggle nav-link btn btn-secondary text-white align-items-center" data-toggle="dropdown"> <i class="far fa-circle mr-2"></i> <%= current_user.name%><i class="fas fa-chevron-down ml-2 text-0 down-arrow"></i></a>
+              <div class="dropdown-menu bg-white py-4 px-3" id="navbarDropdown">
+                <% if current_user.admin %>
+                  <a class="dropdown-item" href="<%= admin_panel_path %>"><i class="fas fa-home"></i> Dashboard</a>
+                  <a class="dropdown-item" href="<%= questionnaires_path %>"><i class="far fa-question-circle"></i> Questionnaires</a>
+                  <a class="dropdown-item" href="<%= dimensions_path %>"><i class="fas fa-arrows-alt"></i> Dimensions</a>
+                  <a class="dropdown-item" href="<%= admin_questionnaires_path %>"><i class="fas fa-question-circle"></i> Questions</a>
+                  <a class="dropdown-item" href="<%= variables_path %>"><i class="fas fa-list"></i> Variables</a>
+                <% else %>
+                  <a class="dropdown-item" href="<%= user_panel_path %>"><i class="fas fa-home"></i> Dashboard</a>
+                  <a class="dropdown-item" href="<%=  user_tests_path %>"><i class="fa fa-list"></i> Leadership Assessments</a>
+                  <a class="dropdown-item" href="<%=  profile_path %>"><i class="fas fa-user-cog"></i> Edit Profile</a>
+                  <a class="dropdown-item" href="<%= edit_user_registration_path %>"><i class="fas fa-cogs"></i> Settings</a>
+                  <a class="dropdown-item" href="<%= user_invites_path %>"><i class="fa fa-paper-plane"></i> Invites</a>
+                <% end %>
+                <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete"><i class="fas fa-sign-out-alt"></i> Log out</a>
+              </div>
+            </li>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--Login modal start-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-block">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center letter-spacing-0" id="exampleModalLabel">Login to Mind Growing</h3>
+      </div>
+      <div class="modal-body modal-login-body">
+        <%= form_for(:user, :url => session_path(:user)) do |f| %>
+        <a href="<%= user_facebook_omniauth_authorize_path %>">
+          <div class="loginmodal-fb mb-2">Login with Facebook</div>
+        </a>
+        <a href="<%= user_google_oauth2_omniauth_authorize_path %>">
+          <div class="loginmodal-google mb-2"> Login with Google</div>
+        </a>
+        <div class="row">
+          <div class="col-5"><hr class="hr-or"></div>
+          <div class="col-2"><p class="text-center mb-0 lh-35">OR</p></div>
+          <div class="col-5"><hr class="hr-or"></div>
+        </div>
+        <div class="form-group">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: 'Enter Your Email', class: 'form-control login-form',id: "login-email", required: true %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.password_field :password, autocomplete: "off", placeholder: 'Enter Your Password', class: 'form-control login-form',id: "login-password", required: true, minlength: 6 %>
+        </div>
+        
+        <div class="form-group remember_me">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+        
+        <div class="actions mt-3">
+          <%= f.submit "Login", class: 'btn btn-primary btn-lg btn-block mb-3 btn-submit' %>
+        </div>
+        <% end %>
+        <center><a href="/users/password/new">Forgot your password?</a></center>
+      </div>
+      <div class="modal-footer d-block">
+        <center>Not a member? <a href="" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Join Now</a></center>
+      </div>
+    </div>
+  </div>
+</div>
+<!--login modal end-->
+<!--sign up modal start-->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-block">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center letter-spacing-0" id="exampleModalLabel">Join Mind Growing</h3>
+      </div>
+      <div class="modal-body modal-login-body">
+        <%= form_for(:user, :url => registration_path(:user)) do |f| %>
+        <a href="<%= user_facebook_omniauth_authorize_path %>">
+          <div class="loginmodal-fb mb-2">Login with Facebook</div>
+        </a>
+        <a href="<%= user_google_oauth2_omniauth_authorize_path %>">
+          <div class="loginmodal-google mb-2"> Login with Google</div>
+        </a>
+        <div class="row">
+          <div class="col-5"><hr class="hr-or"></div>
+          <div class="col-2"><p class="text-center mb-0 lh-35">OR</p></div>
+          <div class="col-5"><hr class="hr-or"></div>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :name, autofocus: true, autocomplete: 'off' ,required: true, placeholder: 'Enter Your Name', class: 'form-control login-form',id: "join-name" %>
+        </div>
+        <div class="form-group">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: 'Enter Your Email', class: 'form-control login-form',id: "join-email", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password, autocomplete: "off",required: true, placeholder: 'Enter Your Password', class: 'form-control login-form',id: "join-password", minlength: 6 %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Enter Your Password Again',id: "join-password-again", class: 'form-control login-form', required: true, minlength: 6 %>
+        </div>
+        
+        <div class="actions mt-3">
+          <%= f.submit "Sign Up", class: 'btn btn-primary btn-lg btn-block mb-1 btn-submit' %>
+        </div>
+        <% end %>
+      </div>
+      <div class="modal-footer d-block">
+        <center>Already a member? <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Login</a></center>
+      </div>
+    </div>
+  </div>
+</div>
+<!--sign up modal end-->

@@ -1,0 +1,22 @@
+<div class="container-fluid container-admin">
+  <div class="container container-signin container-sign px-4">
+    <div class="modal-login-body">
+      <p>
+        <strong>Name</strong><br/>
+        <%= @variable.name %>
+      </p>
+      <p>
+        <strong>Description</strong><br/>
+        <%= @variable.description %>
+      </p>
+      <p>
+        <strong>Value</strong><br/>
+        <%= @variable.value %>
+      </p>
+      <center>
+      <%= link_to 'Edit', edit_variable_path(@variable), class:"btn btn-primary btn-lg mb-3" %> 
+      <%= link_to 'Back', variables_path, class:"btn btn-secondary btn-lg mb-3" %>
+    </center>
+    </div>
+  </div>
+</div>

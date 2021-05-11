@@ -1,0 +1,79 @@
+<%= form_with(model: question, local: true) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <% if I18n.locale != :en && form&.object&.id.present?  %>
+      <% Globalize.with_locale(:en) do %>
+        <p class='mark text-center'>Questionnaire (English: <%= form.object.questionnaire.name %>)<p>
+      <% end %>
+    <% end %>
+    <%= form.select :questionnaire_id,options_for_select(Questionnaire.all.map{|x| [x.name,x.id]},question.questionnaire_id),{include_blank: "Please select a questionnaire type"},{required: true,class: "form-control login-form questionnaire",id: "questionnaire_id"} %>
+  </div>
+  <div class="form-group">
+    <% if I18n.locale != :en && form&.object&.id.present?  %>
+      <% Globalize.with_locale(:en) do %>
+        <p class='mark text-center'>Dimension (English: <%= form.object.dimension.name %>)<p>
+      <% end %>
+    <% end %>
+    <%= form.select :dimension_id,options_for_select((question&.questionnaire&.dimensions || [])&.map{|x| [x.name,x.id]},question&.dimension_id),{include_blank: "Please select questionnaire first"},{required: true,class: "form-control login-form questionnaire",id: "dimension_id"} %>
+  </div>
+  
+  <div class="statements">
+    <% i = 0 %>
+    <%= form.fields_for :statements do |statement_fields| %>
+      <div class="form-group">
+        <% if I18n.locale != :en && form&.object&.id.present?  %>
+          <% Globalize.with_locale(:en) do %>
+            <p class='mark text-center'>Statement <%= i + 1 %> (English: <%= form.object.statements[i].full_text %>)<p>
+          <% end %>
+        <% end %>
+        <%= statement_fields.text_area :full_text,placeholder: "Statement #{statement_fields.index + 1}", class: 'form-control mb-2' %>
+        <%= statement_fields.select :statement_type, QuestionStatement.statement_types.keys, class: 'form-control' %>
+      </div>
+      <% i += 1 %>
+    <% end %>
+  </div>
+  <div class="options">
+    <% j = 0 %>
+    <%= form.fields_for :options do |option_fields| %>
+      <div class="form-group">
+        <% if I18n.locale != :en && form&.object&.id.present?  %>
+          <% Globalize.with_locale(:en) do %>
+            <p class='mark text-center'>Option <%= j + 1 %> (English: <%= form.object.options[j].full_text %>)<p>
+          <% end %>
+        <% end %>
+        <%= option_fields.text_area :full_text,placeholder: "Option #{option_fields.index + 1}",class: 'form-control mb-2' %>
+        <%= option_fields.select :option_type, QuestionOption.option_types.keys%>
+      </div>
+      <% j += 1 %>
+    <% end %>
+  </div>
+  <div class="actions mt-3">
+    <%= form.submit "Save", class: 'btn btn-primary btn-lg btn-block mb-3' %>
+    <%= link_to 'Cancel', questions_path,class: "btn btn-secondary btn-lg btn-block mb-3" %>
+  </div>
+<% end %>
+
+<script>
+  $(document).on("turbolinks:load",function() {
+    $("#questionnaire_id").change(function(){
+      $.ajax({
+        url: "<%= new_question_path %>",
+        type: "GET",
+        dataType: "script",
+        data: {questionnaire_id: $("#questionnaire_id").val()},
+        // success: function (response) {
+          
+        // }
+
+      });
+    });
+  });
+</script>

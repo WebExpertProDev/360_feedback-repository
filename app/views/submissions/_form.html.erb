@@ -1,0 +1,130 @@
+<div class="container container-dashboard leadership-survey" style="overflow: auto">
+	<div class="card">
+		<div class="card-body">
+			<h5 class="text-center mb-3">Leadership 360 Questionnaire</h5>
+			<center class="mb-4"><%= simple_format(@description) %></center>
+			<%= form_with model: @response,local: true  do |f| %>
+				<%= f.hidden_field :completed, value: true %>
+
+				<% @response.submissions.group_by {|rq| rq.question.questionnaire }.sort_by {|q,s| q.priority }.each do |questionnaire,qsubmission_group| %>
+					<h5 class="text-center my-3"><%= questionnaire.name %></h5>
+					<p class="text-center my-3 h5"><%= questionnaire.intro_text %></p>
+					<% qsubmission_group.group_by {|sg| sg.question }.each do |question,submission_group| %>
+					<% sort_sub_group = submission_group.sort { |s| s.question_statement.statement_type_before_type_cast } %>
+					<% if  question.options.second.present? %>
+						<div class="row align-items-center leadership-test">
+							<div class="col-xl-3 coll3 py-3">
+								<h4 class="font-light text-center mb-0"><%= question.options.first.full_text %>
+								<% if Rails.env.development? %>
+									(<%= question.options.first.option_type %>)
+								<% end %> 
+								</h4>
+							</div>
+							<div class="col-xl-6 coll6 py-3 px-1 px-md-2">
+
+								<%= f.fields_for :submissions,sort_sub_group do |s| %>
+									<%= s.hidden_field :question_id %>
+									
+									<% if Rails.env.development? %>
+										question_id = <%= s.object.question_id %> <br>
+										semantic score: <%= s.object.semantic_score %> <br>
+										scaled score: <%= s.object.scaled_score %><br>
+										Dimension: <%= s.object.question.dimension.name %> - <%= s.object.question.dimension.id %> <br>
+										Response id : <%= s.object.response.id %> <br>
+										Submission id : <%= s.object.id %> <br>
+										Question type : <%= s.object.question_statement.statement_type %> <br>
+									<% end %>
+
+									<% if s.object.question_statement.present? %>
+										<h3 class="font-light mt-3 mb-2 text-center"><%= s.object.question_statement.full_text %> 	<!-- S1 -->
+										</h3>
+										<%= s.hidden_field :question_statement_id %>
+									<% end %>
+
+									<div class="text-center radios radios_old">
+										<% values= [-4,-3 ,-2, -1 ,1,2,3,4 ] %>
+										<%# aa= [1,2 ,3, 4 ,5,6,7,8 ] %>
+										<% ind= [3,2,1,0,0,1,2,3] %>
+										<% values = values.reverse if question.options.first.positive? %>
+
+										<% values.each_with_index do |v,i| %>
+											<%= s.radio_button :semantic_score,v, id: "r#{v}#{s.object.question_id}#{s.object.question_statement_id}",class: "r-#{ind[i]}" %>
+											<label for="r<%= v %><%= s.object.question_id %><%=s.object.question_statement_id%>">
+											</label>
+										<% end %>
+									</div>
+								<% end %>
+
+							</div>
+							<div class="col-xl-3 coll3 py-3">
+								<h4 class="font-light text-center mb-0"><%= question.options&.second&.full_text %>
+
+									<% if Rails.env.development? %>
+										(<%= question.options&.second&.option_type %>)
+									<% end %> 
+									
+								</h4>
+							</div>
+						</div>
+					<% else %>
+
+						<!-- <div class="container container-dashboard leadership-survey"> -->
+							
+									<div class="row align-items-center leadership-test">
+										<div class="col-xl-4 col-lg-3 coll3 py-3">
+											<h4 class="font-light text-center mb-0"><%= question.options&.first&.full_text %></h4>
+										</div>
+
+										<div class="col-xl-8 col-lg-9 coll6 py-3 px-0">
+
+
+											<%= f.fields_for :submissions,sort_sub_group do |s| %>
+												<%= s.hidden_field :question_id %>
+												
+												<% if Rails.env.development? %>
+													question_id = <%= s.object.question_id %> <br>
+													semantic score: <%= s.object.semantic_score %> <br>
+													scaled score: <%= s.object.scaled_score %><br>
+													Dimension: <%= s.object.question.dimension.name %> - <%= s.object.question.dimension.id %> <br>
+													Response id : <%= s.object.response.id %> <br>
+													Submission id : <%= s.object.id %> <br>
+													Question type : <%= s.object.question_statement.statement_type %>
+												<% end %>
+
+												<% if s.object.question_statement.present? %>
+													<h3 class="font-light mt-3 mb-2 text-center"><%= s.object.question_statement.full_text %> 	<!-- S1 -->
+													</h3>
+
+													<%= s.hidden_field :question_statement_id %>
+												<% end %>
+												<div class="text-center radios radios_new pb-4">
+													<% for i in 0..7 do %>
+														<!-- <input class="r-<%= i %>" type="radio" id="a<%= i %>" name="a"> -->
+														<%= s.radio_button :semantic_score,i+1, id: "a#{i}-#{s.object.question_statement_id}",class: "r-#{i}" %>
+														<label for="a<%= i %>-<%= s.object.question_statement_id%>"></label>
+													<% end %>
+												</div>
+											<% end %>
+										</div>
+
+
+									</div>
+								
+						<!-- </div> -->
+
+
+
+
+					<% end %>
+					<% end %>
+				<% end %>
+
+				
+				<center>
+				<%= f.submit "Submit Response",class: "btn btn-primary mt-4" %>
+				
+				</center>
+			<% end %>
+		</div>
+	</div>
+</div>

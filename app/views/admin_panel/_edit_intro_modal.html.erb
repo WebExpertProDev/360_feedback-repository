@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div class="modal fade" id="edit_intro" tabindex="-1" role="dialog" aria-labelledby="edit_introLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title text-5 font-weight-bold mb-0" id="edit_introLabel">Introductory Paragraph</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with url: admin_edit_intro_save_path do |form| %>
+        <div class="modal-body">
+          <% @questionnaires.each do |q| %>
+            <label class="mt-2"> <%= q.name %>  </label>
+            <%= fields_for "questionnaire[]", q do |questionnaire_fields| %>
+              <%= questionnaire_fields.text_area :intro_text, rows:3,class: 'form-control', value:"Below are some behaviours. Place indicate how frequent the person assessment shows them and how often he/she needs to show them in order to develop (do more or less) to a great leader." %>
+            <% end %>
+          <% end %>
+            <%#= text_area_tag "text",Variable.find_by_name("INTRODUCTION")&.description,required: true,class: "form-control" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= form.submit "Submit",id: "paragraph_submit",class: "btn btn-primary",data: {disable_with: "Submitting"} %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

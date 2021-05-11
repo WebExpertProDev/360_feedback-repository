@@ -1,0 +1,45 @@
+<div class="container-fluid container-admin">
+  <div class="card mb-5">
+    <div class="card-body text-center px-4">
+      <h5 class="mb-3">Bulk Users upload</h5>
+      <p class="mark py-2 d-inline-block px-sm-5">File should be in OpenDocument Format, also known as the .ODS Spreadsheet. This Format is available for Microsoft Excel.</p>
+      <br/>
+      <%= link_to 'Downlaod Sample File', root_url + 'Users.ods', { target: '_blank', class:"btn btn-primary btn-sm mb-4" }  %>
+      <%= form_with url: '/bulk_users', scope: 'user', local: true do |form| %>
+        <%= form.file_field :excel_file, class:"form-control w-500 mx-auto", required: true %>
+        <%= form.submit 'Upload File', class:"btn btn-primary mt-4" %>
+      <% end %>
+    </div>
+  </div>
+  <h5 class="mb-4 pt-2">All Users</h5>
+  <div class="table-responsive table-users table-datatable">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Country</th>
+          <th>Highest Education</th>
+          <th>Phone Number</th>
+          <th>Organization Name</th>
+          <th>Corporate User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.age.present? ? user.age : 'Not Provided' %></td>
+            <td><%= user.gender.present? ? user.gender : 'Not Provided' %></td>
+            <td><%= user.country.present? ? user.country : 'Not Provided' %></td>
+            <td><%= user.highest_education.present? ? user.highest_education : 'Not Provided' %></td>
+            <td><%= user.phone_number.present? ? user.phone_number : 'Not Provided' %></td>
+            <td><%= user.organization_name.present? ? user.organization_name : 'Not Provided' %></td>
+            <td><%= user.corporate_user %></td>
+          </tr>
+        <% end%>
+      </tbody>
+    </table>
+  </div>
+</div>

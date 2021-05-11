@@ -1,0 +1,67 @@
+<div class="container-fluid container-admin">
+  <div class="container container-signup container-sign px-4">
+    <div class="modal-login-body">
+      <h3 class="text-center mb-3">Question Details</h3>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tr>
+            <th>
+              Questionnaire:
+            </th>
+            <td>
+              <%= @question&.questionnaire&.name %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Dimension:
+            </th>
+            <td>
+              <%= @question&.dimension&.name %>
+            </td>
+          </tr>
+          <% @question.statements.each_with_index do | statement,index|  %>
+	          <tr>
+	            <th>
+	              Statement <%= index + 1 %>
+	            </th>
+	            <td>
+	              <%= statement.full_text %>
+	            </td>
+	          </tr>
+	          <tr>
+	            <th>
+	              Type
+	            </th>
+	            <td>
+	              <%= statement.statement_type%>
+	            </td>
+	          </tr>
+	        <% end %> 
+	        <% @question&.options&.each_with_index do | option,index|  %> 
+	        	<tr>
+	            <th>
+	              Option <%= index + 1%>
+	            </th>
+	            <td>
+	              <%= option&.full_text %>
+	            </td>
+	          </tr>
+	          </tr>
+	            <th>
+	              Option <%= index + 1%> Type
+	            </th>
+	            <td>
+	              <%= option.option_type %>
+	            </td>
+	          </tr>
+	        <% end %>
+        </table>
+        <center>
+					<%= link_to 'Edit', edit_question_path(@question), class:"btn btn-primary btn-lg mb-3" %> 
+					<%= link_to 'Back', questions_path, class:"btn btn-secondary btn-lg mb-3" %>
+				</center>
+      </div>
+    </div>
+  </div>
+</div>

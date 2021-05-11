@@ -1,0 +1,118 @@
+<%# raise %>
+<%= form_tag({}, {:method => :get}) do %>
+  <%= select_tag :questionnaire_id,  options_from_collection_for_select(@leadership_survey.questionnaires, "id", "name"), prompt: 'Please select questionnaire', :onchange => "this.form.submit();" %>
+<% end %>
+
+<table class="table table-striped table-bordered table-responsive">
+  <h4> Self</h4>
+  <% @self_response_submission.each_with_index do |r,ind| %>
+  <tr>
+    <% if ind == 0%>
+    <td></td>
+    <% end %>
+  <% r.submissions.joins(:question_statement,question: [:questionnaire]).where('statement_type = ? AND questionnaire_id = ?', 0,params[:questionnaire_id]).order(:question_id).each do |s| %>
+    <th scope="col"><%= s.question_id %></th>
+  <% end %>
+  </tr>
+  <tr>
+    <th scope="col"><%= r.user_type %></th>
+    <% r.submissions.joins(:question_statement,question: [:questionnaire]).where('statement_type = ? AND questionnaire_id = ?', 0,params[:questionnaire_id]).order(:question_id).each do |s| %>
+    <td><%= s.scaled_score %></td>
+  <% end %>
+  </tr>
+  <% end %>
+
+
+
+  
+
+</table>
+
+<table class="table table-striped table-bordered table-responsive">
+  <h4> Questions</h4>
+  <% @other_response_submission.each_with_index do |r,ind| %>
+  <tr>
+    <%# if ind == 0%>
+    <td></td>
+    <%# end %>
+  <% r.submissions.joins(:question_statement,question: [:questionnaire]).where('statement_type = ? AND questionnaire_id = ?', 0,params[:questionnaire_id]).order(:question_id).each do |s| %>
+    <th scope="col"><%= s.question_id %></th>
+  <% end %>
+  </tr>
+
+  <tr>
+    <th scope="col"><%= r.user_type %></th>
+    <% r.submissions.joins(:question_statement,question: [:questionnaire]).where('statement_type = ? AND questionnaire_id = ?', 0,params[:questionnaire_id]).order(:question_id).each do |s| %>
+    <td><%= s.scaled_score %>(<%= s.semantic_score %>) </td>
+  <% end %>
+  </tr>
+  <% end %>
+</table>
+
+
+<p><%= @leadership_survey.top_3_strength(params[:questionnaire_id],'standard') %></p> 
+<% swot =  @leadership_survey.swot_analysis(params[:questionnaire_id],'standard')%>
+
+<h3>Question wise average function </h3>
+ <table class="table table-striped table-bordered table-responsive">
+  <tr>
+    <th scope="col">Question ID</th>
+    <th scope="col">Average</th>
+    <th scope="col">Ack Talents Diff</th>
+    <th scope="col">Ack TDev alents Diff</th>
+    <th scope="col">Hidden</th>
+    <th scope="col">Blind</th>
+    
+  </tr>
+  <% @leadership_survey.question_wise_average(params[:questionnaire_id],'standard',['peer','direct_report','supervisor','stakeholder']).sort_by { |q, s| s }.each do |s| %>
+  <tr>
+
+    <th scope="row"><%= s.first %></th>
+    <td><%= s.second %></td>
+
+    <td><%= swot[:difference_ack_talents][s.first] %></td>
+    <td><%= swot[:difference_ack_dev_talents][s.first] %></td>
+    <td><%= swot[:difference_hidden_talents][s.first] %></td>
+    <td><%= swot[:difference_blind_spots][s.first] %></td>
+    <%# raise %>
+    
+  </tr>
+  <% end %>
+</table>
+
+  <table class="table table-striped table-bordered table-responsive">
+  <tr>
+    <th scope="col">Question ID</th>
+    <th scope="col">Average</th>
+    
+  </tr>
+  <% @leadership_survey.top_3_strength(params[:questionnaire_id],'standard')[:res].sort_by { |q, s| q }.each do |s| %>
+  <tr>
+
+    <th scope="row"><%= s.first %></th>
+    <td><%= s.second %></td>
+    
+  </tr>
+  <% end %>
+</table>
+
+
+
+
+<table class="table table-striped table-bordered table-responsive">
+  <tr>
+    <td></td>
+    <th scope="col">Positive</th>
+    <th scope="col">Negative</th>
+    
+  </tr>
+  <% @self_response_submission.first.submissions.joins(:question_statement,question: [:questionnaire]).where('statement_type = ? AND questionnaire_id = ?', 0,params[:questionnaire_id]).order(:question_id).each do |s| %>
+  <tr>
+
+    <th scope="row"><%= s.question_id %></th>
+    <td><%= s.question.options.positive.first.full_text %></td>
+    <td><%= s.question.options.negative&.first&.full_text %></td>
+    
+  </tr>
+  <% end %>
+</table>

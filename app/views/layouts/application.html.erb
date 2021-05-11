@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mind Growing 360 Leadership compasses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" href="/favicon.png" type="image/png" sizes="16x16">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+
+  <body>
+    <%# unless params[:controller]=='home' && params[:action]=='admin' %>
+      <%= render 'layouts/header' %>
+    <% if notice %>
+        <!--<div class="alert alert-info" role="alert">-->
+        <!--  <strong>Info!</strong> <%#= notice || alert %>-->
+        <!--</div>-->
+      <script>
+          swal({
+              title: 'Success',
+              text: "<%= notice.html_safe %>",
+              type: 'success',
+              timer: 3000
+          });
+        </script>
+    <% end %>
+    
+    <% if alert.present? %>
+      <script>
+        swal({
+            title: 'Oops!',
+            text: "<%= alert.html_safe %>",
+            type: 'error'
+        });
+      </script>
+    <% end %>
+    <% if flash[:warning] %>
+      <script>
+        swal({
+            title: 'Oops!',
+            text: "<%= flash[:warning].html_safe %>",
+            type: 'warning'
+        });
+      </script>
+    <% end %>
+  
+    <% if flash[:info].present? %>
+      <script>
+        swal({
+            title: 'Success',
+            text: "<%= flash[:info].html_safe %>",
+            type: 'success'
+        });
+      </script>
+    <% end %>
+      <%# unless params[:controller]=='home' && params[:action]=='admin' %>
+      
+      <%# end %>  
+      <div class="container-main">
+        <%= yield %>
+      </div>
+    <%# unless params[:controller]=='home' && params[:action]=='admin' %>
+      
+    <%# end %>
+    <div id="modal_div"></div>
+      <%= render 'layouts/footer' %>
+  </body>
+</html>

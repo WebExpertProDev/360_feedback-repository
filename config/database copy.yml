@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: leadership_development
+  username: rails_dev
+  password: password
+  host: localhost
+  port: 5432
+test:
+  <<: *default
+  database: leadership_test
+  username: rails_dev
+  password: password
+  host: localhost
+  port: 5432
+
+production:
+  <<: *default
+  database: leadership_production
+  password: <%= ENV['DOLLARMARK_DATABASE_PASSWORD'] %>

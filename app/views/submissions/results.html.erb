@@ -1,0 +1,6 @@
+<% if @leadership_survey.challenges? %>
+  <%= render 'challenges_results' %>
+<% elsif @leadership_survey.behaviour? %>
+  <%= render 'behavior' %>
+  <%#= render 'behaviour_results' %>
+<% end %>

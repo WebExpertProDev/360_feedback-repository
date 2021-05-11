@@ -1,0 +1,68 @@
+<div class="container-fluid container-admin">
+  <ul class="nav nav-tabs nav-tabs-default nav-tabs-centered" id="tabCentered" role="tablist">
+    <% @questionnaires.each do |questionnaire| %>
+      <li class="nav-item">
+        <a class="text-4 nav-link <%= 'active' if questionnaire.id == params[:questionnaire].to_i %>" href="<%= questions_path(questionnaire: questionnaire.id) %>" aria-controls="tab1s" aria-expanded="true"><%= questionnaire.name %></a>
+      </li>
+    <% end %>
+  </ul>
+  <div class="pt-4 pb-4">
+    <div class="row mb-4 align-items-center">
+      <div class="col-lg-9 text-center text-lg-left">
+        <h5 class="mb-3 mb-lg-0">Questions of <%= @questionnaire_name.present? ? @questionnaire_name : 'All Questionnaires' %></h5>
+      </div>
+      <div class="col-lg-3 text-center text-lg-right">
+        <%= link_to "Add new question",new_question_path, class:"btn btn-primary mb-2 mb-lg-0" %>
+      </div>
+    </div>
+    <div class="table-responsive table-users">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Questionnaire</th>
+            <th>Dimension</th>
+            <%# if @questionnaire != "Mindset" %>
+              <th>S1</th>
+              <th>S2</th>
+            <%# end %>
+            <th>O1</th>
+            <% unless @questionnaire_name == 'Leadership Behaviour' %>
+            <th>O2</th>
+            <% end %>
+            <th colspan="3">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @questions.each do |question| %>
+            <tr>
+              <td><%= question&.questionnaire&.name %></td>
+              <td><%= question&.dimension&.name %></td>
+              <%# if @questionnaire != "Mindset" %>
+                <% if question.statements.present?%>
+                  <% question.statements.each do |statement|%>
+                    <td><%= statement&.full_text&.truncate(150) %> (<%= statement&.statement_type %>)</td>
+                  <% end %>
+                <% else %>
+                  <td></td><td></td>
+                <% end %>
+              <% #end %>
+              <% if question.options.present?%>
+                <% question.options.each do |option|%>
+                  <td><%= option&.full_text&.truncate(150) %> (<%= option&.option_type %>)</td>
+                <% end %>
+              <% else %>
+                <td></td><td></td>
+              <% end %>
+              <td class="action-links"><%= link_to '<i class="fas fa-eye"></i>'.html_safe, question %></td>
+              <td class="action-links"><%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_question_path(question) %></td>
+              <td class="action-links"><%= link_to '<i class="fas fa-trash-alt text-danger"></i>'.html_safe, question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <center><%= paginate @questions %></center> 
+    </div>
+  </div>
+</div>

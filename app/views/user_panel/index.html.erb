@@ -1,0 +1,62 @@
+<div class="container container-dashboard">
+  <div class="row">
+    <div class="col-12">
+      <div class="user-header-bg">
+        <div class="user-header">
+          <div class="row align-items-center">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-5">
+              <img src="<%= current_user.profile_pic%>" width="155" class="avatar-img">
+            </div>
+            <div class="col-xl-10 col-lg-9 col-md-8 col-sm-6 col-7">
+              <div class="row">
+                <div class="col-12">
+                  <h2 class="text-primary mb-3"> <%= current_user.name%> </h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <a href="<%= profile_path%>" class="btn btn-primary btn-lg mt-2 px-sm-4">Edit Profile</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="p-50 bg-white user-body">
+        <div class="row mb-3 mb-md-0 align-items-center">
+          <div class="col-md-6 col-lg-3 text-md-right text-lg-left text-center text-lg-left text-center mb-3 mb-md-0">
+            <h3 class="font-weight-bold">assessments</h3>
+          </div>
+          <div class="col-md-6 col-lg-3 text-lg-left text-center mb-3 mb-md-0">
+            <a href="<%= user_tests_path %>" class="btn btn-primary">Leadership Tests</a>
+          </div>
+          <div class="col-md-12 col-lg-6 text-lg-right text-center mb-3 mb-md-0">
+            <h3 class="align-middle font-weight-bold mb-0 d-inline-block mr-4 mt-md-3 mt-xl-0"> Your Balance: <span class="text-primary letter-spacing-0"><%= humanized_money_with_symbol(current_user.balance)%></span></h3>
+            <a href="<%= top_up_path %>" class="btn btn-primary mt-2 mt-sm-0 mt-md-3 mt-xl-0 mb-md-0">Top Up</a>
+          </div>
+        </div>
+        <!--
+        <div class="row row-user-fields">
+          <div class="col-md-6">
+            <div class="user-fields mb-3 mb-md-0">
+              <span class="font-weight-bold">Name:</span>
+              <span class="float-right"><%= current_user.name%></span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="user-fields mb-3 mb-md-0">
+              <span class="font-weight-bold">Email:</span>
+              <span class="float-right"><%= current_user.email%></span>
+            </div>
+          </div>
+        </div>
+        -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

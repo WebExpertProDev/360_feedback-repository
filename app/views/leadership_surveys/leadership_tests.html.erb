@@ -1,0 +1,124 @@
+<div class="container-fluid container-admin">
+	<div class="container">
+		<%= render "start_survey_modal" %>
+		<div class="row mb-4 align-items-center">
+			<div class="col-lg-6 text-center text-lg-left">
+				<h5 class="mb-3 mb-lg-0"><i class="far fa-circle text-primary mr-3 text-5"></i>Your Assessments</h5>
+			</div>
+			<div class="col-lg-6 text-center text-lg-right">
+				<% if current_user.completed? %>
+					<%= link_to "<i class='fas fa-plus mr-2 text-5'></i>New Assessment".html_safe, new_leadership_survey_path, remote: true,class: 'btn btn-primary mb-2 mb-lg-0' %>
+				<% else %>
+					<%= link_to "<i class='fas fa-plus mr-2 text-5'></i>New Assessment".html_safe, new_leadership_survey_path, remote: true,class: 'btn btn-primary mb-2 mb-lg-0 disable-button' %><br>
+					<%= link_to 'Complete Profile first', profile_path %>
+				<% end %>
+			</div>
+		</div>
+		<% if @tests.present? %>
+			<div class="row">
+				<% @tests.each do |test| %>
+					<div class="col-md-6 mb-4">
+						<div class="card text-center">
+							<div class="card-body p-3 p-lg-5">
+								<h4 class="mb-4"><i class="far fa-circle text-secondary mr-3 text-4"></i><%= test&.name %></h4>
+								<p class="text-muted text-2 mb-4">
+									Created: <%= test&.created_at %>
+									<br>
+									ID: <%= test&.slug %>
+								</p>
+								<div class="row px-md-4 row-assessment-actions">
+									<% response = test.responses.where(user: current_user,user_type: "self").first %>
+									<% if response.present? %>
+										<% if response&.completed %>
+											<div class="col mb-3">
+												<% if response %>
+													<%= link_to response_results_path(response) do %>
+														<div class="img-assessment-actions">
+															<img src="/icon-continue.png" class="mb-3">
+														</div>
+														<p class="assessment-actions">SEE<br>RESULTS</p>
+													<% end %>
+												<% end %>
+											</div>
+										<% else %>
+											<div class="col mb-3">
+												<% if response %>
+													<%= link_to edit_response_path(response) do %>
+														<div class="img-assessment-actions">
+															<img src="/icon-continue.png" class="mb-3">
+														</div>
+														<p class="assessment-actions">CONTINUE<br>ASSESSMENT</p>
+													<% end %>
+												<% end %>
+											</div>
+										<% end %>
+									<% else %>
+										<div class="col mb-3">
+											<%= link_to leadership_survey_responses_path(test, response: {user_type: "self"}),method: :post do %>
+												<div class="img-assessment-actions">
+													<img src="/icon-send.png" class="mb-3">
+												</div>
+												<p class="assessment-actions">START<br>ASSESSMENT</p>
+											<% end %>
+										</div>
+									<% end %>
+									<div class="col mb-3">
+										
+										<a href="#" data-toggle="modal" data-target="#invite_user<%= test.id%>">
+										<%# Send Invite %>
+											<div class="img-assessment-actions">
+												<img src="/icon-send.png" class="mb-3">
+											</div>
+											<p class="assessment-actions">SEND<br>INVITE</p>
+										
+										</a>
+
+									</div>
+									<div class="col mb-3">
+										<%= link_to survey_invitees_path(test&.id), remote: true do %>
+											<div class="img-assessment-actions">
+												<img src="/icon-list.png" class="mb-3">
+											</div>
+											<p class="assessment-actions">INVITEES<br>LIST</p>
+										<% end %>
+									</div>
+									<div class="col mb-3">
+										<%= link_to destroy_test_path(test&.id), method: :delete, data: {
+											confirm: 'Are you sure?'
+										} do %>
+											<div class="img-assessment-actions">
+												<img src="/icon-remove.png" class="mb-3">
+											</div>
+											<p class="assessment-actions">REMOVE<br>ASSESSMENT</p>
+										<% end %>
+									</div>
+									<% if Rails.env.development? %>
+									<div class="col mb-3">
+										<%= link_to leadership_survey_summary_path(test&.id) do %>
+											<div class="img-assessment-actions">
+												<img src="/icon-list.png" class="mb-3">
+											</div>
+											<p class="assessment-actions">SUMMARY</p>
+										<% end %>
+									</div>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		<% else %>
+			<div class="h6">
+				No Assessment currently present.
+					<% if !current_user.completed? %>
+						<%= link_to 'Complete your Profile', profile_path %> to add New Assessment.
+					<% end %>
+			</div>
+		<% end %>
+	</div>
+	<center><%= paginate @tests %></center>
+</div>
+<% @tests.each do |test| %>
+	<%= render "invite_user_modal", survey: test.id %>
+<% end %>

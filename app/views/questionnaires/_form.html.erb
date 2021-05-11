@@ -1,0 +1,35 @@
+<%= form_with(model: questionnaire, local: true) do |form| %>
+  <% if questionnaire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(questionnaire.errors.count, "error") %> prohibited this questionnaire from being saved:</h2>
+      <ul>
+      <% questionnaire.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <% if I18n.locale != :en && form&.object&.id.present? %>
+      <% Globalize.with_locale(:en) do %>
+        <p class='mark text-center'>English: <%= form.object.name %><p>
+      <% end %>
+    <% end %>
+    <%= form.text_field :name, required: true,class: "form-control login-form", placeholder: "Name" %>
+  </div>
+  <div class="form-group">
+    <% if I18n.locale != :en && form&.object&.id.present? %>
+      <% Globalize.with_locale(:en) do %>
+        <p class='mark text-center'>English: <%= form.object.intro_text %><p>
+      <% end %>
+    <% end %>
+    <%= form.text_area :intro_text, class: 'form-control login-form', placeholder: "Intro Text" %>
+  </div>
+  <div class="form-group">
+    <%= form.number_field :priority, step: 0, class: 'form-control login-form', placeholder: "Set Priority" %>
+  </div>
+  <%= form.hidden_field :locale, value: params[:locale] %>
+  <div class="actions mt-3">
+    <%= form.submit class: 'btn btn-primary btn-lg btn-block' %>
+  </div>
+<% end %>

@@ -1,0 +1,47 @@
+
+<div class="mb-4 pt-3 font-paragraph-2">
+  <div class="text-light bg-purple py-3 px-4 font-weight-bold">
+  <%# <span class="plusminus float-right">+</span>  %>
+  <%= option.full_text %>
+  <% if Rails.env.development? %>
+    <%= option.id %> - <%= option.question.id %> - <%= option.question.questionnaire.name %>
+  <% end %>
+  </div>
+<%# <div class="accordion_body" style="display:none;"> %>
+  <table class="table result-table table-responsive d-md-table">
+    <thead class="bg-sky">
+      <tr>
+        <td></td>
+        <td></td>
+        <% score_values_hash.values.each do |v| %>
+          <td class="text-light" id="<%= v.downcase.split(' ').join('-') %>" headers="blank"><%= v %></td>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody class="table-bordered">
+      <% dis = Submission.user_type_and_score_wise_distribution(option.question_id,@leadership_survey.id,'standard')%>
+      <% dev = Submission.user_type_and_score_wise_distribution(option.question_id,@leadership_survey.id,'development')%>
+      <%#= raise %>
+      <% @user_types.each do |u,vv| %>
+        <tr class="colored_tr">
+          <td class="height-o">  <%= u.humanize.capitalize%>  </td>
+          <td class="p-0 m-0">
+            <div class="col-12 colss border-bottom">
+              Now
+            </div>
+            <div class="col-12 colss">
+              Desired
+            </div>
+          </td>
+          <% score_values_hash.each do |k,v| %>
+            <td class="p-0 m-0 colored_td" headers="<%= [vv,k] %>">
+              <div class="col-12 border-bottom colss colored colored_1"><%= dis.dig([vv,k]) %></div>
+              <div class="col-12 colss colored colored_2"><%= dev.dig([vv,k]) %></div>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%# </div> %>
+</div>

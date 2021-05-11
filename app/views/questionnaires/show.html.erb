@@ -1,0 +1,22 @@
+<div class="container-fluid container-admin">
+  <div class="container container-signin container-sign px-4">
+    <div class="modal-login-body">
+      <p>
+        <strong>Name</strong><br/>
+        <%= @questionnaire.name %>
+      </p>
+      <p>
+        <strong>Intro Text</strong><br/>
+        <%= @questionnaire.intro_text %>
+      </p>
+      <p>
+        <strong>Priority</strong><br/>
+        <%= @questionnaire.priority %>
+      </p>
+      <center>
+      <%= link_to 'Edit', edit_questionnaire_path(@questionnaire), class:"btn btn-primary btn-lg mb-3" %> 
+      <%= link_to 'Back', questionnaires_path, class:"btn btn-secondary btn-lg mb-3" %>
+    </center>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<!-- <h2>asdada</h2> -->
+<div class="container container-dashboard leadership-survey">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="text-center mb-3">Leadership 360 Questionnaire</h4>
+			<center class="mb-4"><%= simple_format(@description) %></center>
+			<% @questions.each do |question| %>
+			<% if question.statements.present? %>
+				<div class="row align-items-center leadership-test">
+					<div class="col-lg-3 py-3">
+						<h4 class="text-center font-weight-bold mb-0"><%= question.options.first.full_text %></h4>
+					</div>
+					<div class="col-lg-6 py-3 px-0 px-md-2">
+						<% question.statements.each_with_index do |statement,index|%>
+						<% if !(index != 0 and  !@test.both_statements) %>
+						<h3 class="mt-3 mb-2 text-center"><%= statement.full_text %> </h3>
+						<div class="text-center radios">
+							<% for i in (-2..2) %>
+							<input type="radio"  id="r<%= i%><%= index%><%= statement&.id%>" class="r-<%= i.to_s %>" name="big<%= index%><%= statement&.id%>"><label for="r<%= i%><%= index%><%= statement&.id%>"></label>
+							<% end %>
+						</div>
+						<% end %>
+						<% end %>
+					</div>
+					<div class="col-lg-3 py-3">
+						<h4 class="text-center font-weight-bold mb-0"><%= question.options.second.full_text %></h4>
+						
+					</div>
+				</div>
+			<% else %>
+				<%= render "options_in_survey",question: question,statement: nil %>
+			<% end %>
+			<% end %>
+			<center><%= link_to "Submit Response", user_survey_results_path(@test.slug),class: "btn btn-primary mt-4" %></center>
+		</div>
+	</div>
+</div>

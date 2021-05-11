@@ -1,0 +1,455 @@
+<div class="logbook-btn">
+  <button class="btn btn-primary btn-sm btn-print" onclick="window.print()">Print Report</button>
+  <% if @leadership_survey.logbook.present? %>
+    <a class="btn btn-primary btn-sm btn-logbook" href="<%= edit_leadership_survey_logbook_path(@leadership_survey,@leadership_survey.logbook) %>">Go to Personal logbook</a>
+  <% else %>
+    <a class="btn btn-primary btn-sm btn-logbook" href="<%= new_leadership_survey_logbook_path(@leadership_survey) %>">Go to Personal logbook</a>
+  <% end %>
+</div>
+
+<div class="bg-light">
+  <div class="bg-purple py-5 position-relative">
+    <div class="container py-2">
+      <h2 id="break" class="font-heading-4 text-none text-center text-light mb-3">
+      Mind Growing 360 Leadership Compass: Leadership Behavior
+      </h2>
+      <p class="font-paragraph-1 text-center text-light mb-0">
+        Personal feedback report for <%= @response.leadership_survey.user.name %>
+        
+      </p>
+      <p class="font-paragraph-1 text-center text-light mb-0">
+        Disclaimer: This report has been prepared with professional care. It is valid for a maximum of 2 years.
+      </p>
+    </div>
+  </div>
+  <div class="bg-light py-5">
+    <div class="container mt-4">
+      <h2 class="text-none font-heading-5 mb-4">Table of contents</h2>
+      <ol class="text-purple table-ol font-weight-bold">
+        <li class="li1">
+          <a href="#li-1a">
+            Part 1: Introduction and Background: 360 Leadership Compass Behaviors – Why, How, and What?
+          </a>
+        </li>
+        <li class="li1">
+          <a href="#li-1b">
+            Part 2: Your Personal Growth Dashboard
+          </a>
+          <ol class="text-sky table-ol">
+            <li class="li2">
+              <a href="#li-2a">
+                Your Leadership Behavior
+              </a>
+              <ol class="text-purple table-ol li3">
+                <li>
+                  <a href="#li-3a">
+                    Overview
+                  </a>
+                </li>
+                <li>
+                  <a href="#li-3b">
+                    Key Strengths and Development Points
+                  </a>
+                </li>
+                <li>
+                  <a href="#li-3c">
+                    Personal SWOT
+                  </a>
+                </li>
+              </ol>
+            </li>
+            <li class="li2">
+              <a href="#li-2b">
+                Your Mindset
+              </a>
+              <ol class="text-purple table-ol li3">
+                <li>
+                  <a href="#li-3d">
+                    Mindset Meter
+                  </a>
+                </li>
+                <li>
+                  <a href="#li-3e">
+                    Overview of Steering Beliefs
+                  </a>
+                </li>
+              </ol>
+            </li>
+            <li class="li2">
+              <a href="#li-2c">
+                Diving in Deep
+              </a>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <hr>
+  <div class="container py-5 content-result">
+    <h3 class="font-heading-3 text-none text-purple mt-2 mb-4" id="li-1a">Part 1: Introduction and Background: 360 Leadership Compass Behaviors – Why, How, and What?</h3>
+    <p class="font-paragraph-2 mb-3">As I describe in my book, Mind Growing: Leadership is interaction. To grow your own mind and those of others so that you can become a great leader, interaction is key!</p>
+
+    <p class="font-paragraph-2 mb-3">And while the saying goes “it takes two to tango”, this is only partly true. The dance analogy is super relevant, though, because you can start and influence the dance with your behavior! If you're dancing with someone and not making the right moves, the fun dies. People will get irritated, and at some point, you’ll lose your dancing partner. However, if you are willing to look at the way you’re dancing, to reflect upon it, learn some new passes, and practice…then dancing becomes more and more fun. You’ll have all the dancing partners you want. And of course, the dance itself becomes easier, more fun, and beautiful to watch if all dancing partners put in the same effort.</p>
+
+    <p class="font-paragraph-2 mb-3">So interaction is a dance! You can make it a success or a failure.</p>
+
+    <p class="font-paragraph-2 mb-3">The 360 Leadership Compass Behaviors is based on the famous concept of Timothy Leary, Leary’s Rose. During my 30 years of experience, I’ve developed my own approach to presenting and using it.</p>
+
+    <p class="font-paragraph-2 mb-3">In Chapters Ten and Eleven of my book, Mind Growing: Leadership To Build Thriving Companies Through Personal Development, you can find an in-depth description of the tool as well as practical examples and tips that will help you apply it.</p>
+
+    <p class="font-paragraph-2 mb-3">The 360° feedback tool collects feedback about how you are dancing at this moment, and what could help you become a star dancer!</p>
+
+    <p class="font-paragraph-2 mb-3">It will give you feedback and insight into the following elements:</p>
+
+
+    <p class="font-paragraph-2 font-weight-bold">
+      The 2 Core Dimensions:
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-sky font-weight-bold">Active-Passive:</span> How active/dominant are you during interactions?
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-sky font-weight-bold">I-WE:</span> Are you mainly defending your own interests and beliefs or showing your interest in a win-win outcome?
+    </p>
+    <p class="font-paragraph-2 mb-3 font-weight-bold">
+      These 2 dimensions combined encompass 4 main colors and 8 behavioral strategies that shape an interaction:
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-yyellow font-weight-bold">Yellow or initiating behavior (Active-We)</span>
+      <br/>Inspiring
+      <br/>Coaching
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-green font-weight-bold">Green or Following behavior</span>
+      <br/>Participating
+      <br/>Following
+    </p>
+    <p class="font-paragraph-2 mb-1">
+      <span class="text-blue font-weight-bold">Blue or withdrawing Behavior</span>
+      <br/>Retreating
+      <br/>Resisting
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      <span class="text-red font-weight-bold">Red or competing behavior</span>
+      <br/>Convincing
+      <br/>Directing
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      Summarized AS a graph, the leadership compass behaviors looks as follows:
+    </p>
+    <%= render 'graph_config' %>
+    <%= render 'circle_chart', ind: 0, labels: @self.keys,data: [10,10,10,10,10,10,10,10],tooltip: false %>
+
+  </div>
+  <hr>
+  <div class="container py-5 content-result">
+    <h3 class="font-heading-3 text-none text-purple mt-2 mb-4" id="li-1b">Part 2: Your Personal Growth Dashboard</h3>
+    <p class="text-sky result-sub-heading mb-3" id="li-2a">
+      2.1: Your leadership behaviors
+    </p>
+    <p class="result-sub-heading-2 text-purple mb-4" id="li-3a">2.1.1 Overview</p>
+    <p class="font-paragraph-2 mb-4">
+      Below, you’ll find a visual overview of your results: your self-assessment and feedback of others. Also there are two graphs representing the perspective from your supervisor and all others on which points to develop. They are called Developmental-supervisor and Developmental-others.
+      <br> Click on the personal logbook button to get more information and/or record your insights and conclusions.
+    </p>
+    <div class="row mb-5 justify-content-center">
+      <% @circle_datasets.each_with_index do |h,ind| %>
+        <div class="col-md-6 col-xl-4 p-0 pt-3 pb-1">
+          <p class="result-sub-heading-2 text-purple mb-3 text-center"><%= h[0].humanize == 'Self' ? h[0].humanize : h[0].humanize.pluralize  %></p>
+          <%= render 'circle_chart', ind: ind+1, labels: h[1].keys,data: h[1].values,tooltip: true %>
+        </div>
+      <% end %>
+    </div>
+    <p class="text-purple result-sub-heading mb-4" id="li-3b">
+      2.1.2 Key Strengths and Development Points
+    </p>
+    <p class="pt-3 font-paragraph-2 mb-5">
+      The top 3 highest and lowest points indicated are based only on feedback from others - they do not take into account your self-evaluation).
+      <br> The top 3 items are those items with the highest scores – regarding these, evaluators don’t believe any change is needed (i.e., you do not need to do anymore or less)
+      <br> The top 3 development points are the 3 items with a low score – here, evaluators see the biggest need for change.
+      <br>To make sure that these items represent you top 3 strenghts and development points you have to look for them in the “dive in deep” section at the end of this report. Here you can see if your raters indicate if these behaviors are at the right level, if you need to show them more or less. This will define if they are strengths or development points
+    </p>
+    <table class="table table-bordered user-table design-table font-paragraph-2 mb-5">
+      <thead class="thead-dark">
+        <tr width="100%">
+          <th width="50%">Top 3 Highest Scores </th>
+          <th width="50%">Top 3 Lowest Scores</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+             <%= @top_3_strength[:standard]&.first %>
+          </td>
+          <td>
+             <%= @top_3_strength[:dev]&.first %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+             <%= @top_3_strength[:standard]&.second %>
+          </td>
+          <td>
+             <%= @top_3_strength[:dev]&.second %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+             <%= @top_3_strength[:standard]&.third %>
+          </td>
+          <td>
+             <%= @top_3_strength[:dev]&.third %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <p class="text-purple result-sub-heading mb-4" id="li-3c">
+      2.1.3 Your Personal SWOT
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">Acknowledged strengths</span> = strengths that you see in yourself (as per your self-evaluation) and which others also acknowledge.
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">Acknowledged development points</span> = Development points that you recognize in yourself and which others also acknowledge.
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">Hidden Talents (Opportunities)</span> = Behaviors that you personally view as in need of development, but which others view as strong.
+    </p>
+    <p class="mb-4 font-paragraph-2">
+      <span class="text-sky font-weight-bold">Blind Spots (= Threats)</span> = Behaviors that you consider strengths but which others view as possible development points.
+    </p>
+    <div class="row mb-5">
+      <div class="col-md-6 mb-md-4">
+        <label class="text-sky font-paragraph-2 font-weight-bold">Acknowledged strengths</label>
+        <table class="table-responsive d-md-table table table-bordered user-table">
+          <tbody>
+            <!-- Loop -->
+            <% @swot_analysis[:ack_talents].each do |v| %>
+              <tr>
+                <td>
+                  <%= v %>
+                </td>
+              </tr>
+              <% end %>
+              <!-- Loop -->
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 mb-md-4">
+        <label class="text-sky font-paragraph-2 font-weight-bold">Hidden talents</label>
+        <table class="table-responsive d-md-table table table-bordered user-table">
+          <tbody>
+             <!-- Loop -->
+            <% @swot_analysis[:hidden_talents].each do |v| %>
+              <tr>
+                <td>
+                  <%= v %>
+                </td>
+              </tr>
+              <% end %>
+              <!-- Loop -->
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 mb-md-4">
+        <label class="text-sky font-paragraph-2 font-weight-bold">Acknowledged development points</label>
+        <table class="table-responsive d-md-table table table-bordered user-table">
+          <tbody>
+             <!-- Loop -->
+              <% @swot_analysis[:ack_dev_talents].each do |v| %>
+              <tr>
+                <td>
+                  <%= v %>
+                </td>
+              </tr>
+              <% end %>
+              <!-- Loop -->
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 mb-md-4">
+        <label class="text-sky font-paragraph-2 font-weight-bold">Blind spots</label>
+        <table class="table-responsive d-md-table table table-bordered user-table">
+          <tbody>
+             <!-- Loop -->
+               <% @swot_analysis[:blind_spots].each do |v| %>
+              <tr>
+                <td>
+                  <%= v %>
+                </td>
+              </tr>
+              <% end %>
+              <!-- Loop -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <p class="text-sky result-sub-heading mb-4" id="li-2b">
+      2.2 Your Mindset
+    </p>
+    <p class="font-paragraph-2 mb-2">
+      Your mindset is how you see the world; it encompasses your key beliefs about how humans and organizations should function. They steer the behavior that is covered in this report!
+      <br>
+      To clarify further, we have defined two opposite mindsets. Both are useful and necessary in certain circumstances.
+      <br/>
+      The two opposite mindsets are:
+    </p>
+    <p class="mb-2 font-paragraph-2">
+      <span class="text-sky font-weight-bold">The Closed, Controlling Mindset.</span> If you have a closed/controlling mindset, you believe things need to be structured, organized and controlled. You believe people should focus on their tasks, receive clear instructions, and that you should follow through on them.
+    </p>
+    <p class="mb-4 font-paragraph-2">
+      <span class="text-sky font-weight-bold">The Open, Exploring Mindset.</span>  If you have an open/exploring mindset, you believe you need to trust in people and processes. You believe giving people autonomy will create energy that can then be guided in the right direction.
+    </p>
+    <p class="text-purple result-sub-heading-2 mb-3" id="li-3d">
+      2.2.1. Mindset Meter
+    </p>
+    <p class="mb-5 font-paragraph-2">
+      In the graph below, you can see where different categories of evaluators place you on the spectrum between Closed/Controlling and Open/Exploring extremes. So, your mindset lies somewhere in between the two! In the next section, you can see your scores on the different beliefs that relate to a Closed or Open mindset.
+    </p>
+    <div class="py-3">
+      <center>
+      <div id="chartContainer">
+        <%= render 'speedometer' %>
+      </div>
+      </center>
+    </div>
+    <p class="mt-4 text-purple result-sub-heading-2 mb-3" id="li-3e">
+      2.2.2 Overview of Steering Beliefs
+    </p>
+    <p class="font-paragraph-2 mb-4">
+      In the graph below, you will find the scores that you and others have given you for each of the core beliefs that define your mindset. Below the graph, you will find the definition of each belief and how it relate to an open or closed mindset.
+    </p>
+    <div class="pb-5">
+      <div class="bar-chart d-block d-md-none">
+        <%= chartjs_bar_chart @graph_object_mindset,{
+          plugins: {datalabels: false
+          }} %>
+      </div>
+      <div class="d-none d-md-block">
+        <%= chartjs_bar_chart @graph_object_mindset,{
+          height: 100,
+          plugins: {datalabels: false
+          }} %>
+      </div>
+    </div>
+    <table class="table-responsive d-md-table table table-bordered user-table design-table font-paragraph-2 mb-5">
+      <thead class="thead-dark">
+        <tr>
+          <th></th>
+          <th>Closed Controlling Mindset</th>
+          <th>Open Exploring Mindset</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font-weight-bold">
+            Locus of control
+          </td>
+          <td>
+            Most organizational situations are complex. The world and its markets change so quickly that we have little influence on our own successes and failures. These are mostly defined by circumstance
+          </td>
+          <td>
+            While many organizational situations are complex and while the world and its markets change quickly, each of us can still shape our own successes or failures.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Purpose
+          </td>
+          <td>
+            The goal of a company is to make profits.
+          </td>
+          <td>
+            Profit is necessary but is a consequence of having a strong purpose. Purpose is more important than profit.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Transparency
+          </td>
+          <td>
+            A lot of information does not need to be shared, people will be indiscreet or panic. It is better to work on a need-to-know basis
+          </td>
+          <td>
+            We must be transparent, share information, and show people data on everything.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Networks
+          </td>
+          <td>
+            We need structure, rules, and control to function and get results. Only a clear top-down organizational structure will work.
+          </td>
+          <td>
+            A company can function and get results with minimal structure, rules, planning, and control. Networks of people are more effective than a rigid top-down structure
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Experimentation
+          </td>
+          <td>
+            We can shape, measure, and control our world and our company. Planning is crucial.
+          </td>
+          <td>
+            We cannot shape, measure, and mechanically control our world and company. However, we can influence it to evolve in a certain direction. We need experimentation instead of planning.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Participation
+          </td>
+          <td>
+            Involving people is time-consuming and a top-down approach is much more efficient
+          </td>
+          <td>
+            Involving people leads to more support, creativity, and energy.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Renewal
+          </td>
+          <td>
+            Let’s stick to what we know and what works
+          </td>
+          <td>
+            It’s necessary to keep questioning ways of doing things.
+          </td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold">
+            Empowerment
+          </td>
+          <td>
+            People need rules, control, and push to perform. The best way to motivate people is to reward and punish them (i.e., with a ‘carrot and stick’ approach) “They have to earn trust and not the easy way.”
+          </td>
+          <td>
+            People can handle freedom and autonomy. They thrive when given purpose, autonomy, and mastery. “We can and need to trust people until we are proven wrong.”
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-sky result-sub-heading mb-3" id="li-2c">
+      2.3 Diving-in Deep
+    </p>
+    <p class="font-paragraph-2 mb-3">
+      Below you will find item-level evaluations that you and others have given. These relate both to the frequency of your behavior now, and how frequent it should be for you to develop yourself.
+    </p>
+
+    <% @questionnaires.each do |qq| %>
+      <% qq.dimensions.each do |d| %>
+        <% if d.question_options.present? %>
+            <% d.question_options.positive.each do |o| %>
+              <%= render 'summary_table',option: o,score_values_hash: Submission::BEHAVIOUR_SCORE_DESC %>
+            <% end %>
+          <%# </div> %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

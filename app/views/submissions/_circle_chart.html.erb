@@ -1,0 +1,100 @@
+<div class="">
+  <canvas id="pie-chart-<%= ind %>" width="250" height="230"></canvas>
+</div>
+
+<script type="text/javascript">
+	new Chart(document.getElementById("pie-chart-<%= ind %>"), {
+  type: "polarArea",
+
+  data: {
+  datasets: [
+    
+    {
+        label: "My Second dataset",
+      
+        backgroundColor: [
+            '#FADBBA',
+            '#FADBBA',
+            'rgb(0,176,80)',
+            'rgb(0,176,80)',
+            '#24B5C1',
+            '#24B5C1',
+            '#E57E84',
+            '#E57E84'
+        ],
+        data: <%= data %>
+    }
+  ],
+  labels: <%== labels %>
+},
+
+  options: {
+  	// height: 50,
+  	// width: 50,
+    elements: {
+      center: {
+        text: 'Desktop',
+        position: 'center'
+        // color: '#36A2EB', //Default black
+        // fontStyle: 'Helvetica', //Default Arial
+        // sidePadding: 15 //Default 20 (as a percentage)
+      }
+    },
+  	maintainAspectRatio: false,
+    responsive: true,
+    plugins: {
+      datalabels: {
+        formatter: function(value, context) {
+          return context.chart.data.labels[context.dataIndex];
+          
+        },
+        anchor: 'start',
+        align: 'end',
+        offset: 90 // Gets updated
+      },
+    },
+    tooltips: {
+      enabled: <%= tooltip %>
+    },
+    cutoutPercentage: 20,
+    legend: {
+      display: false
+    },
+    layout: {
+      padding: 30,
+    },
+    scale: {
+      scaleLabel: {
+        display: true
+      },
+      ticks: {
+        max: 12,
+        maxTicksLimit: 1,
+        display: false,
+      },
+      angleLines: {
+        display: true
+      },
+      pointLabels: {
+        display: false
+      }
+    },
+    
+    onResize: function() {
+      let width = document.getElementById("pie-chart").width
+      let padding = myChart.options.layout.padding
+      myChart.options.plugins.datalabels.offset = width/2-padding
+    }
+  }
+});
+
+function updateOffset() {
+  let width = document.getElementById("pie-chart").width
+  let padding = myChart.options.layout.padding
+  myChart.options.plugins.datalabels.offset = width/2-padding
+  myChart.update()
+}
+// updateOffset() //init call after we know the dimensions of the chart
+
+
+</script>

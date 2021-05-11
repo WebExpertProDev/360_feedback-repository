@@ -1,0 +1,23 @@
+<div class="container-fluid container-top">
+  <div class="container container-signin container-sign">
+    <div class="modal-login-body">
+      <h3 class="text-center"><%= t "devise.invitations.new.header" %></h3>
+      <hr/>
+      
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <% resource.class.invite_key_fields.each do |field| -%>
+          <div class="field">
+            <%= f.label field %><br />
+            <%= f.text_field field, class: 'form-control login-form', required: true %>
+          </div>
+        <% end -%>
+      
+        <div class="actions mt-3">
+          <%= f.submit t("devise.invitations.new.submit_button"), class: 'btn btn-primary btn-lg btn-block mb-3 btn-submit' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

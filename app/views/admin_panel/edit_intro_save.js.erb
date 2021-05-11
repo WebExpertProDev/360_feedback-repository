@@ -1,0 +1,6 @@
+<% if @success%>
+	toastr.success("Saved successfully!")
+<% else %>
+	toastr.error("Something went wrong. Please try again!")
+<% end %>
+$("#edit_intro").modal("hide");

@@ -1,0 +1,16 @@
+<div class="row align-items-center leadership-test">
+	<% question.options.each_with_index do |option,index|%>
+		<div class="col-lg-3 py-3">
+			<h4 class="text-center font-weight-bold mb-0"><%= option.full_text %></h4>
+		</div>
+			<% if index == 0 %>
+				<div class="col-lg-6 py-3 px-0 px-md-2">
+					<div class="text-center radios">
+					<% for i in (-2..2) %>
+						<input type="radio"  id="r<%= i%><%= option.id%><%= statement&.id%>" class="r-<%= i %>" name="big<%= option.id%><%= statement&.id%>"><label for="r<%= i%><%= option.id%><%= statement&.id%>"></label>
+					<% end %>
+					</div>
+				</div>
+			<% end %>
+	<% end %>
+</div>

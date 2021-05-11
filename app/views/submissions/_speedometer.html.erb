@@ -1,0 +1,73 @@
+<div id="speedometer"></div>
+
+<script type="text/javascript">
+
+var gauge_dials = JSON.parse('<%= raw @gauge_dials.to_json %>')
+gauge_dials = gauge_dials.map(function(i){
+    i.data = [parseFloat(i.data[0])];
+    return i
+})
+var options = {
+
+    chart: {
+      type: 'gauge',
+    },
+
+    title: {
+        text: 'Mindset Meter'
+    },
+
+    pane: {
+        startAngle: -90,
+        endAngle: 90, 
+        background: null
+    },
+
+    // the value axis
+    yAxis: {
+        min: 0,
+        max: 7,
+
+        minorTickInterval: 'auto',
+        minorTickWidth: 1,
+        minorTickLength: 10,
+        minorTickPosition: 'inside',
+        minorTickColor: '#666',
+
+        tickPixelInterval: 30,
+        tickWidth: 2,
+        tickPosition: 'inside',
+        tickLength: 10,
+        tickColor: '#666',
+
+        labels: {
+            step: 2,
+            rotation: 'auto'
+        },
+        plotBands: [
+        {
+            label:{
+                text: "Controlling Mindset",
+                align: "right",
+                x: -20,
+            },
+            from: 0,
+            to: 3.5,
+            color: '#24B5C1' // red
+        }, 
+        {
+            label:{
+                text: "Exploring Mindset",
+                align: "left"
+            },
+            from: 3.5,
+            to: 7,
+            color: '#51174f' // green
+        }, 
+        ]
+    },
+
+    series: gauge_dials
+}
+ Highcharts.chart('speedometer', options )
+</script>
